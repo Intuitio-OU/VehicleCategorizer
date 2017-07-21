@@ -18,10 +18,6 @@ import selenium
 import scrapy
 
 # set up retrieving the contents from each indvidual webpage
-# plugincars webpage content
-plugincarsWebpage = request.get('http://www.plugincars.com/cars')
-plugincarsTree = html.fromstring(plugincarsWebpage.content)
-
 # EV google search webpage content, find another library, other possible solutions include xgoogle and json
 # replace with bs4 library for google search scraping and jdpower
 # be careul with rate limiting (the amount of requests that are allowed for a webpage)
@@ -35,3 +31,18 @@ googlePlusEVSearchTree = html.fromstring(googlePlusEVSearchWebpage.content)
 # jdpower search webpage content
 jdpowerSearchWebpage = request.get('https://plus.google.com/+Cool-electric-cars')
 jdpowerSearchTree = html.fromstring(jdpowerSearchWebpage.content)
+
+# extract and print names of evs from plugincars
+from bs4 import BeautifulSoup
+import urllib2
+
+plugincarsUrl = "'http://www.plugincars.com/cars'"
+
+plugincarsContent = urllib2.urlopen(plugincarsUrl).read()
+
+plugincarsSoup = BeautifulSoup(plugincarsContent)
+
+print plugincarsSoup.prettify()
+
+print plugincarsSoup.title.string
+
