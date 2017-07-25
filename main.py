@@ -33,14 +33,16 @@ jdpowerSearchTree = html.fromstring(jdpowerSearchWebpage.content)
 from bs4 import BeautifulSoup
 import urllib2
 
-plugincarsUrl = "'http://www.plugincars.com/cars'"
+plugincarsUrl = raw_inputs("www.plugincars.com/cars")
 
-plugincarsContent = urllib2.urlopen(plugincarsUrl).read()
+plugincarsR = requests.get("http://"+plugincarsUrl)
 
-plugincarsSoup = BeautifulSoup(plugincarsContent)
+plugincarsData = plugincarsR.text
+
+#plugincarsContent = urllib2.urlopen(plugincarsUrl).read()
+
+plugincarsSoup = BeautifulSoup(plugincarsData)
 
 print plugincarsSoup.prettify()
 
 print plugincarsSoup.title.string
-
-#bruh
