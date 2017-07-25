@@ -1,7 +1,4 @@
-# bear in mind, writing all of this straight into git because my current laptop is not ideal for 
-# compiling, use desktop once you get new place or find somewhere to run tests
-
-
+# use repl.it for compiling
 # http library that allows python to access webpages, easy and fast xml and html library in python, same as soup 4 but easier and faster to pick up
 # ideal for static webpages
 from lxml import html
