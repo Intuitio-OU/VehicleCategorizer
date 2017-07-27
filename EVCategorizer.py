@@ -1,18 +1,10 @@
-# use repl.it for compiling
-# http library that allows python to access webpages, easy and fast xml and html library in python, same as soup 4 but easier and faster to pick up
-# ideal for static webpages
+
 from lxml import html
 import requests
-# WEB SCRAPING IS LEGAL for most websites
-# so long as one does not scrape at alarming rates or violate an individual webpage's user agreement, have at it!
-# https://www.quora.com/On-which-websites-can-I-do-web-scraping-legally
-# should help with rate limiting
 from ratelimit import *
 import requests
-# allows you to analyze the contents of the page (python parsing library), specifically for messy sites
 from bs4 import BeautifulSoup as soup
 from urllib2 import urlopen
-# web automation library, open up the browser and navigate to desired pages
 import selenium
 # DO RESEARCH ON THIS LIBRARY TO UNDERSTAND EXACTLY WHAT IT DOES 07-19-17, sounds useful refer to reseources
 import scrapy
@@ -20,11 +12,7 @@ import scrapy
 # import sys
 # from GoogleScraper import scrape_with_config, GoogleSearchError
 # from GoogleScraper.database import ScraperSearch, SERP, Link
-# came from this github account
-# https://github.com/NikolaiT/GoogleScraper
-# scrapes google, bing, and other search engines
-# however general consensus from multiple sites is that the main 2 libraries required are urllib/urllib2 and bs4
-# for the sake of urlopen and BeautifulSoup, yum soup :)
+
 
 class EVCategorizer:
   def _init_(self):
@@ -59,8 +47,6 @@ class EVCategorizer:
   
 # set up retrieving the contents from each indvidual webpage
 # EV google search webpage content, find another library, other possible solutions include xgoogle and json
-# replace with bs4 library for google search scraping and jdpower
-# be careul with rate limiting (the amount of requests that are allowed for a webpage)
 googleEVSearchWebpage = request.get('https://www.google.com/#q=electric+vehicles')
 googleSearchTree = html.fromstring(googleEVSearchWebpage.content)
 
