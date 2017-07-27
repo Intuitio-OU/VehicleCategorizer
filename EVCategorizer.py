@@ -7,28 +7,36 @@ import requests
 from ratelimit import *
 import requests
 # allows you to analyze the contents of the page (python parsing library), specifically for messy sites
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup as soup
 from urllib2 import urlopen
 # web automation library, open up the browser and navigate to desired pages
 import selenium
 # DO RESEARCH ON THIS LIBRARY TO UNDERSTAND EXACTLY WHAT IT DOES 07-19-17, sounds useful refer to reseources
 import scrapy
+# in case you want to tap into googlescraper python library, use these lines
+# import sys
+# from GoogleScraper import scrape_with_config, GoogleSearchError
+# from GoogleScraper.database import ScraperSearch, SERP, Link
+# came from this github account
+# https://github.com/NikolaiT/GoogleScraper
+# scrapes google, bing, and other search engines
+# however general consensus that the main 2 libraries required are urllib/urllib2 and bs4
 
 class EVCategorizer{
-  
-  # list container for URLs
-  self.urlList=[]		
-  # dict container for URLs
-  self.urlDict= {}
-  # dict containers for the URLs of each individual site 
-  self.googleSearchUrlDict={}
-  self.googlePlusUrlDict={}
-  self.plugincarsUrlDict={}
-  self.jdpowerUrlDict={}
-  
-  # counters for successful hits and failures
-  self.successCounter=0
-  self.failureCounter=0
+  def _init_(self):
+    # list container for URLs
+    self.urlList=[]		
+    # dict container for URLs
+    self.urlDict= {}
+    # dict containers for the URLs of each individual site 
+    self.googleSearchUrlDict={}
+    self.googlePlusUrlDict={}
+    self.plugincarsUrlDict={}
+    self.jdpowerUrlDict={}
+
+    # counters for successful hits and failures
+    self.successCounter=0
+    self.failureCounter=0
   
 # set up retrieving the contents from each indvidual webpage
 # EV google search webpage content, find another library, other possible solutions include xgoogle and json
