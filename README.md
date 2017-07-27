@@ -26,12 +26,9 @@ keep out of convenience of knowledge)
 
 General consensus from multiple sites is that the main 2 libraries required are urllib/urllib2 and bs4 for the sake of urlopen and BeautifulSoup, yum soup :)
 
-# WEB SCRAPING IS LEGAL for most websites
-# so long as one does not scrape at alarming rates or violate an individual webpage's user agreement, have at it!
+# WEB SCRAPING IS LEGAL for most websites so long as one does not scrape at alarming rates or violate an individual webpage's user agreement, have at it!
 
-#----------------------------------------------------------
 # References
-# ---------------------------------------------------------
 https://www.quora.com/On-which-websites-can-I-do-web-scraping-legally
 https://github.com/NikolaiT/GoogleScraper
 https://elitedatascience.com/python-web-scraping-libraries
