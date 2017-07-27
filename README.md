@@ -13,68 +13,30 @@ There are pros and cons to using some libraries so rather than scower the intern
 here are the purposes and pros and cons of each used library (some libraries may not be used by the end but
 keep out of convenience of knowledge)
 
-html library from lxml allows 
 
-# use repl.it for compiling
-# http library that allows python to access webpages, easy and fast xml and html library in python, same as soup 4 but easier and faster to pick up
-# ideal for static webpages
-from lxml import html
-import requests
+- BeatifulSoup from bs4 library which is a fast and flexible parser for being able to access data from html and xml documents
+- url open from urllib2/urllib to form client page
+- html library from lxml allows python to access webpage (possibly won't use since BeautifulSoup and urlib may fulfill all necessary puposes)
+- requests to extract text from webpages
+- ratelimit library for constraining the scrape rate to prevent getting bloacked
+- selenium library for web automation tools
+- googlescraper is a custom python library from a github account that allows for the parsing of data in mutliple search engines including but limited to google
+- xgoogle is tailored to google search engine specifically for web scraping
+- scrapy is a web scraping library that can be implemented (need more details)
+
+General consensus from multiple sites is that the main 2 libraries required are urllib/urllib2 and bs4 for the sake of urlopen and BeautifulSoup, yum soup :)
+
 # WEB SCRAPING IS LEGAL for most websites
 # so long as one does not scrape at alarming rates or violate an individual webpage's user agreement, have at it!
-# https://www.quora.com/On-which-websites-can-I-do-web-scraping-legally
-# should help with rate limiting
-from ratelimit import *
-import requests
-# allows you to analyze the contents of the page (python parsing library), specifically for messy sites
-from bs4 import BeautifulSoup as soup
-from urllib2 import urlopen
-# web automation library, open up the browser and navigate to desired pages
-import selenium
-# DO RESEARCH ON THIS LIBRARY TO UNDERSTAND EXACTLY WHAT IT DOES 07-19-17, sounds useful refer to reseources
-import scrapy
-# in case you want to tap into googlescraper python library, use these lines
-# import sys
-# from GoogleScraper import scrape_with_config, GoogleSearchError
-# from GoogleScraper.database import ScraperSearch, SERP, Link
-# came from this github account
-# https://github.com/NikolaiT/GoogleScraper
-# scrapes google, bing, and other search engines
-# however general consensus from multiple sites is that the main 2 libraries required are urllib/urllib2 and bs4
-# for the sake of urlopen and BeautifulSoup, yum soup :)
 
-class EVCategorizer:
-  def _init_(self):
-    # list container for URLs
-    self.urlList=[]		
-    # dict container for URLs
-    self.urlDict= {}
-    # dict containers for the URLs of each individual site
-    # add more dictionaries if you wish to use googlescraper
-    self.googleSearchUrlDict={}
-    self.googlePlusUrlDict={}
-    self.plugincarsUrlDict={}
-    self.jdpowerUrlDict={}
+#----------------------------------------------------------
+# References
+# ---------------------------------------------------------
+https://www.quora.com/On-which-websites-can-I-do-web-scraping-legally
+https://github.com/NikolaiT/GoogleScraper
+https://elitedatascience.com/python-web-scraping-libraries
+https://www.youtube.com/watch?v=XQgXKtPSzUI
+https://github.com/DanielHabib/VenueCategorizer
 
-    # counters for successful hits and failures
-    self.successCounter=0
-    self.failureCounter=0
-    
-  
-  
-  
-  def __repr__(self):
-		return "EV Category Scraper"
-	def __iter__ (self):
-		for a in urlList:
-			yield a
-	def __getitem__(self,key):
-		for a in self.urlDict.keys():
-			return urlDict[key]
-	def __len__(self) :
-		return len(entryList)
-  
-# set up retrieving the contents from each indvidual webpage
-# EV google search webpage content, find another library, other possible solutions include xgoogle and json
-# replace with bs4 library for google search scraping and jdpower
-# be careul with rate limiting (the amount of requests that are allowed for a webpage)
+
+
