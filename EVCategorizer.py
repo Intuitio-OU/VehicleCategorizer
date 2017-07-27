@@ -14,6 +14,22 @@ import selenium
 # DO RESEARCH ON THIS LIBRARY TO UNDERSTAND EXACTLY WHAT IT DOES 07-19-17, sounds useful refer to reseources
 import scrapy
 
+class EVCategorizer{
+  
+  # list container for URLs
+  self.urlList=[]		
+  # dict container for URLs
+  self.urlDict= {}
+  # dict containers for the URLs of each individual site 
+  self.googleSearchUrlDict={}
+  self.googlePlusUrlDict={}
+  self.plugincarsUrlDict={}
+  self.jdpowerUrlDict={}
+  
+  # counters for successful hits and failures
+  self.successCounter=0
+  self.failureCounter=0
+  
 # set up retrieving the contents from each indvidual webpage
 # EV google search webpage content, find another library, other possible solutions include xgoogle and json
 # replace with bs4 library for google search scraping and jdpower
@@ -29,10 +45,6 @@ googlePlusEVSearchTree = html.fromstring(googlePlusEVSearchWebpage.content)
 jdpowerSearchWebpage = request.get('https://plus.google.com/+Cool-electric-cars')
 jdpowerSearchTree = html.fromstring(jdpowerSearchWebpage.content)
 
-# extract and print names of evs from plugincars
-from bs4 import BeautifulSoup
-import urllib2
-
 plugincarsUrl = raw_inputs("www.plugincars.com/cars")
 
 plugincarsR = requests.get("http://"+plugincarsUrl)
@@ -46,3 +58,4 @@ plugincarsSoup = BeautifulSoup(plugincarsData)
 print plugincarsSoup.prettify()
 
 print plugincarsSoup.title.string
+}
