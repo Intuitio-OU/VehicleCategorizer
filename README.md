@@ -34,6 +34,7 @@ https://github.com/NikolaiT/GoogleScraper
 https://elitedatascience.com/python-web-scraping-libraries
 https://www.youtube.com/watch?v=XQgXKtPSzUI
 https://github.com/DanielHabib/VenueCategorizer
-
+https://www.analyticsvidhya.com/blog/2015/10/beginner-guide-web-scraping-beautiful-soup-python/
+http://www.catonmat.net/blog/python-library-for-google-search/
 
 
