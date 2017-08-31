@@ -73,4 +73,4 @@ print plugincarsSoup.prettify()
 
 print plugincarsSoup.title.string
 
-#
+soup.get_all('title')
