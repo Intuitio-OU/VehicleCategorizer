@@ -13,7 +13,8 @@ import scrapy
 # import sys
 # from GoogleScraper import scrape_with_config, GoogleSearchError
 # from GoogleScraper.database import ScraperSearch, SERP, Link
-
+# use this as reference for beautifulsoup4 class
+# http://www.pythonforbeginners.com/beautifulsoup/beautifulsoup-4-python
 
 class EVCategorizer:
   def _init_(self):
