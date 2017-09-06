@@ -1,4 +1,11 @@
-#
+# python implementation of creating a webscraper to collect data from multiple websites on electric vehicles
+# specs including battery capacity, make, model, year, retail locations
+# possible setup of having a nested dictionaries that will append entries as it scrapes data from websites
+
+# mainDict = websites
+# mainDict.keys = {jdpower.com, google.com. googleplus, plugincars}
+# mainDict.values ={[electricVehicle0Dict, electricVehicle1Dict.....]
+# ex: electricVehicleDict0.keys = specifications mentioned above their corresponding values
 
 from lxml import html
 import requests
