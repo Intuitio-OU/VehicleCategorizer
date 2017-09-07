@@ -1,6 +1,6 @@
 # EVCategorizer
 
-Pull information from different websites about specific electric vehicles, need to specify the sites.
+Pull information from different websites about electric vehicles, need to specify the sites.
 
 Information that is important to consider when looking at cars include mileage, safety rating, and mpg. This program is
 specicifically tailored towards pulling infromation about electric vehicles like battery capacity, safety rating, model
@@ -14,7 +14,7 @@ here are the purposes and pros and cons of each used library (some libraries may
 keep out of convenience of knowledge)
 
 
-- BeatifulSoup from bs4 library which is a fast and flexible parser for being able to access data from html and xml documents
+- BeatifulSoup from bs4 library which is a fast and flexible parser for being able to access data from html and xml documents (this is probably what's going to be doing most of the heav lifting)
 - url open from urllib2/urllib to form client page
 - html library from lxml allows python to access webpage (possibly won't use since BeautifulSoup and urlib may fulfill all necessary puposes)
 - requests to extract text from webpages
