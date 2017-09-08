@@ -24,9 +24,7 @@ keep out of convenience of knowledge)
 - xgoogle is tailored to google search engine specifically for web scraping
 - scrapy is a web scraping library that can be implemented (need more details)
 
-General consensus from multiple sites is that the main 2 libraries required are urllib/urllib2 and bs4 for the sake of urlopen and BeautifulSoup, yum soup :)
-
-For those that are new to web scarping, it is legal for most websites so long as one does not scrape at alarming rates or violate an individual webpage's user agreement.
+General consensus from multiple sites is that the main 2 libraries required are urllib/urllib2 and bs4 for the sake of urlopen and BeautifulSoup.
 
 # References
 https://www.quora.com/On-which-websites-can-I-do-web-scraping-legally
