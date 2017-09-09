@@ -1,6 +1,6 @@
-# EVCategorizer
+# VehicleCategorizer
 
-Pull information from different websites about electric vehicles, need to specify the sites.
+Pull information from different websites about vehicles, need to specify the sites.
 
 Information that is important to consider when looking at cars include mileage, safety rating, and mpg. This program is
 specicifically tailored towards pulling infromation about electric vehicles like battery capacity, safety rating, model
@@ -27,6 +27,7 @@ keep out of convenience of knowledge)
 General consensus from multiple sites is that the main 2 libraries required are urllib/urllib2 and bs4 for the sake of urlopen and BeautifulSoup.
 
 # References
+http://developer.edmunds.com/api-documentation/vehicle/
 https://www.quora.com/On-which-websites-can-I-do-web-scraping-legally
 https://github.com/NikolaiT/GoogleScraper
 https://elitedatascience.com/python-web-scraping-libraries
