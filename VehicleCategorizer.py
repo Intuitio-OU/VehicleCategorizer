@@ -2,6 +2,8 @@
 # specs including battery capacity, make, model, year, retail locations
 # possible setup of having a nested dictionaries that will append entries as it scrapes data from websites
 
+# vehicle API website
+# http://developer.edmunds.com/api-documentation/vehicle/
 # mainDict = websites
 # mainDict.keys = {jdpower.com, google.com. googleplus, plugincars}
 # mainDict.values ={[electricVehicle0Dict, electricVehicle1Dict.....]
