@@ -13,6 +13,8 @@ There are pros and cons to using some libraries so rather than scower the intern
 here are the purposes and pros and cons of each used library (some libraries may not be used by the end but
 keep out of convenience of knowledge)
 
+To utilize the vehicle api, generate a dataset in their format that their api banks off of
+(Make, Model, Year, Trim, Style)
 
 - BeatifulSoup from bs4 library which is a fast and flexible parser for being able to access data from html and xml documents (this is probably what's going to be doing most of the heav lifting)
 - url open from urllib2/urllib to form client page
