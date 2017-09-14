@@ -1,4 +1,5 @@
 # VehicleCategorizer
+----------------------------------------------------------------------------------------------------------------------------------------
 
 Pull information from different websites about vehicles, need to specify the sites.
 
