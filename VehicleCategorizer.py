@@ -43,8 +43,6 @@ class EVCategorizer:
     self.failureCounter=0
     
   
-  
-  
   def __repr__(self):
 		return "EV Category Scraper"
 	def __iter__ (self):
