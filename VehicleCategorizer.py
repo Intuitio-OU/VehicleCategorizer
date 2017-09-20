@@ -11,6 +11,7 @@
 
 from lxml import html
 import requests
+# this will be able to keep track of the data collection rate while scraping
 from ratelimit import *
 import requests
 from bs4 import BeautifulSoup as soup
