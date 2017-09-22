@@ -15,7 +15,7 @@ import requests
 from ratelimit import *
 import requests
 from bs4 import BeautifulSoup as soup
-from urllib2 import urlopen
+from urllib2 import urlopen as uReq
 import selenium
 # DO RESEARCH ON THIS LIBRARY TO UNDERSTAND EXACTLY WHAT IT DOES 07-19-17, sounds useful refer to reseources
 import scrapy
@@ -26,7 +26,7 @@ import scrapy
 # use this as reference for beautifulsoup4 class
 # http://www.pythonforbeginners.com/beautifulsoup/beautifulsoup-4-python
 
-class EVCategorizer:
+class VehicleCategorizer:
   def _init_(self):
     # list container for URLs
     self.urlList=[]		
@@ -43,43 +43,7 @@ class EVCategorizer:
     self.successCounter=0
     self.failureCounter=0
     
-  
-  def __repr__(self):
-		return "EV Category Scraper"
-	def __iter__ (self):
-		for a in urlList:
-			yield a
-	def __getitem__(self,key):
-		for a in self.urlDict.keys():
-			return urlDict[key]
-	def __len__(self) :
-		return len(entryList)
-  
-# set up retrieving the contents from each indvidual webpage
-# EV google search webpage content, find another library, other possible solutions include xgoogle and json
-googleEVSearchWebpage = request.get('https://www.google.com/#q=electric+vehicles')
-googleSearchTree = html.fromstring(googleEVSearchWebpage.content)
-
-# EV google plus search webpage content
-googlePlusEVSearchWebpage = request.get('https://plus.google.com/+Cool-electric-cars')
-googlePlusEVSearchTree = html.fromstring(googlePlusEVSearchWebpage.content)
-
-# jdpower search webpage content
-jdpowerSearchWebpage = request.get('https://plus.google.com/+Cool-electric-cars')
-jdpowerSearchTree = html.fromstring(jdpowerSearchWebpage.content)
-
-plugincarsUrl = raw_inputs("www.plugincars.com/cars")
-
-plugincarsR = requests.get("http://"+plugincarsUrl)
-
-plugincarsData = plugincarsR.text
-
-#plugincarsContent = urllib2.urlopen(plugincarsUrl).read()
-
-plugincarsSoup = BeautifulSoup(plugincarsData)
-
-print plugincarsSoup.prettify()
-
-print plugincarsSoup.title.string
-
-soup.get_all('title')
+    # start by webscraping for plugincars.com
+    # website specific to electric vehicles
+    plugincars_url = 'www.plugincars.com/cars'
+    
