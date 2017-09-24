@@ -60,6 +60,8 @@ class VehicleCategorizer:
     # need the html.parser to get all of the information from this specific page
     self.plugincars_soup = soup(self.plugincarsClient.content, "html.parser")
     
+    # find a pattern for the car names, their all atags but you need to specify the dividers
+    # that contain them uniquely
     
     
     #self.plugincars_page_soup = soup(self.plugincars_page_html, "html.parser")
