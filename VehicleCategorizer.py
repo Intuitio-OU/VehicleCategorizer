@@ -72,8 +72,7 @@ class VehicleCategorizer:
         # print("got to the loop")
         for div in self.plugincars_soup.findAll("div", {"class" : "car-a"}):
             # get href to get the partial url to see the full details of each vehicle
-            self.plugincars_url_list.append(div.h3.a['href'])
-        """
+            self.plugincars_url_list.append(self.plugincars_url+div.h3.a['href'])
         # plugincars urls are used to create their individual soups so that they can be
         # parsed
         for url in self.plugincars_url_list:
@@ -85,8 +84,8 @@ class VehicleCategorizer:
                 
             # start sorintg out each of the pieces of information from the main soup
             # and individual car soup
-            self.plugincars_dict[url]['make'] = curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text[0:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.indexOf(" ")]
-            self.plugincars_dict[url]['model'] = curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text[curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.indexOf(" ")+1:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.indexOf(" specifications")]
+            self.plugincars_dict[url]['make'] = curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text[0:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")]
+            self.plugincars_dict[url]['model'] = curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text[curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")+1:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" specifications")]
             #base_msrp
             #tech
             #body()
@@ -103,14 +102,15 @@ class VehicleCategorizer:
 
     def get_plugincars_names(self):
         return self.plugincars_names
-    """
         
         
 # test grabbing information from the page
 vc = VehicleCategorizer()
 #for atag in vc.edmunds_soup.find_all("a"):
     #print(atag.text)
-print(vc.plugincars_url_list)
+for url in vc.plugincars_dict.keys():
+    print("make:", vc.plugincars_dict[url]['make'])
+    print("model:",vc.plugincars_dict[url]['model'])
 #print(vc.plugincars_url_list)
 #print(vc.plugincars_soup)    
     
