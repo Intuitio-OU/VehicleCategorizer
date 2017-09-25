@@ -42,20 +42,21 @@ class VehicleCategorizer:
         #self.googlePlusUrlDict={}
         self.topspeedUrlDict={}
         #self.jdpowerUrlDict={}
-        self.plugincars_url_dict=collections.defaultdict(dict)
+        self.plugincars_dict=collections.defaultdict(dict)
         
         # counters for successful hits and failures
         self.successCounter=0
         self.failureCounter=0
         
         # get the url of edmunds
-        self.edmunds_url = "https://www.topspeed.com/cars/plugin-cars/ke4486.html"
+        #self.edmunds_url = "https://www.topspeed.com/cars/plugin-cars/ke4486.html"
         # open the html file of the webpage
-        self.edmundsClient = uReq.get(self.edmunds_url)
+        #self.edmundsClient = uReq.get(self.edmunds_url)
         # get the webpage's html information
-        self.edmunds_soup = soup(self.edmundsClient.content)
+        #self.edmunds_soup = soup(self.edmundsClient.content)
         
         # get url for plugincars
+        self.plugincars_url = "http://www.plugincars.com"
         self.plugincars_base_url = "http://www.plugincars.com/cars"
         
         # get contents of plugincars.com
@@ -63,36 +64,53 @@ class VehicleCategorizer:
         
         # get webpage html contents
         # need the html.parser to get all of the information from this specific page
-        self.plugincars_soup = soup(self.plugincarsClient.content, "html.parser")
+        self.plugincars_soup = soup(self.plugincarsClient.content, 'html.parser')
         
         self.plugincars_url_list = []
         # plugincars divides up the individual cars into dividers with a mutual class of car-a
         # that being said, the names of each car is found under h3's text
-        for div in self.plugincars_soup.find_all("div", class_="car-a"):
+        # print("got to the loop")
+        for div in self.plugincars_soup.findAll("div", {"class" : "car-a"}):
             # get href to get the partial url to see the full details of each vehicle
-            self.plugincars_url_list.append(self.plugincars_base_url+str(div.h3.a['href']))
+            self.plugincars_url_list.append(div.h3.a['href'])
+        """
+        # plugincars urls are used to create their individual soups so that they can be
+        # parsed
         for url in self.plugincars_url_list:
             # need to form a new client in order to get the soup from each url and then
             curr_plugincars_client = uReq.get(url)
             # need to get the form the soup to scrape from the individual urls
+            #try:
             curr_plugincars_soup  = soup(curr_plugincars_client.content, "html.parser")
+                
+            # start sorintg out each of the pieces of information from the main soup
+            # and individual car soup
+            self.plugincars_dict[url]['make'] = curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text[0:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.indexOf(" ")]
+            self.plugincars_dict[url]['model'] = curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text[curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.indexOf(" ")+1:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.indexOf(" specifications")]
+            #base_msrp
+            #tech
+            #body()
+            #battery capacity
+            #charge_rate
+            #fuel_source
+            # try:
+            #self.plugincars_dict[url]['make'] = make
+            #self.plugincars_dict[url]['model'] = model
             
-            #self.plugincars_url_dict[url]
-        
         #self.plugincars_page_soup = soup(self.plugincars_page_html, "html.parser")
         #must always have in order to add in new parameters to the class
         self.__dict__.update({x:k for x, k in locals().items() if x != 'self'})
 
     def get_plugincars_names(self):
         return self.plugincars_names
-    
+    """
         
         
 # test grabbing information from the page
 vc = VehicleCategorizer()
 #for atag in vc.edmunds_soup.find_all("a"):
     #print(atag.text)
-for i in vc.plugincars_url_list:
-    print(i)
+print(vc.plugincars_url_list)
+#print(vc.plugincars_url_list)
 #print(vc.plugincars_soup)    
     
