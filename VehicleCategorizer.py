@@ -81,11 +81,19 @@ class VehicleCategorizer:
             # need to get the form the soup to scrape from the individual urls
             #try:
             curr_plugincars_soup  = soup(curr_plugincars_client.content, "html.parser")
-                
+            #except():
             # start sorintg out each of the pieces of information from the main soup
             # and individual car soup
-            self.plugincars_dict[url]['make'] = curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text[0:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")]
-            self.plugincars_dict[url]['model'] = curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text[curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")+1:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" specifications")]
+            self.plugincars_dict[url]['make'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[0:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")]
+            self.plugincars_dict[url]['model'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")+1:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" specifications")]
+            #print(curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"}))
+            self.plugincars_dict[url]['base_msrp($)'] = ''.join(x for x in curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[1].text if x.isdigit())
+            self.plugincars_dict[url]['tech'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[3].text
+            self.plugincars_dict[url]['body'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[4].text
+            self.plugincars_dict[url]['range(mi)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text.find(" ")]
+            self.plugincars_dict[url]['battery_capacity(kWh)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text.find(" ")]
+            self.plugincars_dict[url]['charge_rate(kW)'] =curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")]
+            
             #base_msrp
             #tech
             #body()
@@ -108,9 +116,16 @@ class VehicleCategorizer:
 vc = VehicleCategorizer()
 #for atag in vc.edmunds_soup.find_all("a"):
     #print(atag.text)
+
 for url in vc.plugincars_dict.keys():
-    print("make:", vc.plugincars_dict[url]['make'])
+    #print("make:", vc.plugincars_dict[url]['make'])
+    #print("make:", vc.plugincars_dict[url]['make'])
     print("model:",vc.plugincars_dict[url]['model'])
+    print("base_msrp:",vc.plugincars_dict[url]['base_msrp($)'])
+    print("tech:",vc.plugincars_dict[url]['tech'])
+    print("body:",vc.plugincars_dict[url]['body'])
+    print("range:",vc.plugincars_dict[url]['range(mi)'])
+    print("battery_capacity:",vc.plugincars_dict[url]['battery_capacity(kWh)'])
+    print("charge_rate:",vc.plugincars_dict[url]['charge_rate(kW)'])
 #print(vc.plugincars_url_list)
 #print(vc.plugincars_soup)    
-    
