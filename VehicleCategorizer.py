@@ -10,18 +10,16 @@
 # ex: electricVehicleDict0.keys = specifications mentioned above their corresponding values
 
 import collections
-#from lxml import html
+# from lxml import html
 # this will be able to keep track of the data collection rate while scraping
 # from ratelimit import *
-# import bs4
 from bs4 import BeautifulSoup as soup
 import requests as uReq
-#import selenium
-# DO RESEARCH ON THIS LIBRARY TO UNDERSTAND EXACTLY WHAT IT DOES 07-19-17, sounds useful refer to reseources
-
+import csv
+import time
 # learning curve for scrapy is a bit steeper and it is it's own api, bs4 more prefereable
 # for the sake of developing you're own
-#import scrapy
+# import scrapy
 
 # in case you want to tap into googlescraper python library, use these lines
 # import sys
@@ -58,74 +56,49 @@ class VehicleCategorizer:
         # get url for plugincars
         self.plugincars_url = "http://www.plugincars.com"
         self.plugincars_base_url = "http://www.plugincars.com/cars"
-        
         # get contents of plugincars.com
         self.plugincarsClient = uReq.get(self.plugincars_base_url)
-        
         # get webpage html contents
         # need the html.parser to get all of the information from this specific page
         self.plugincars_soup = soup(self.plugincarsClient.content, 'html.parser')
-        
+        # list to contain all of the urls scraped from the main plugincars page
         self.plugincars_url_list = []
+        self.plugincars_car_names_list = []
         # plugincars divides up the individual cars into dividers with a mutual class of car-a
         # that being said, the names of each car is found under h3's text
         # print("got to the loop")
         for div in self.plugincars_soup.findAll("div", {"class" : "car-a"}):
             # get href to get the partial url to see the full details of each vehicle
             self.plugincars_url_list.append(self.plugincars_url+div.h3.a['href'])
-        # plugincars urls are used to create their individual soups so that they can be
-        # parsed
-        for url in self.plugincars_url_list:
+            self.plugincars_car_names_list.append(div.h3.a.text)
+        # plugincars urls are used to create their individual soups so that they can be parsed
+        for i in range(len(self.plugincars_url_list)):
             # need to form a new client in order to get the soup from each url and then
-            curr_plugincars_client = uReq.get(url)
+            curr_plugincars_client = uReq.get(self.plugincars_url_list[i])
             # need to get the form the soup to scrape from the individual urls
-            #try:
             curr_plugincars_soup  = soup(curr_plugincars_client.content, "html.parser")
-            #except():
             # start sorintg out each of the pieces of information from the main soup
             # and individual car soup
-            self.plugincars_dict[url]['make'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[0:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")]
-            self.plugincars_dict[url]['model'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")+1:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" specifications")]
-            #print(curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"}))
-            self.plugincars_dict[url]['base_msrp($)'] = ''.join(x for x in curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[1].text if x.isdigit())
-            self.plugincars_dict[url]['tech'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[3].text
-            self.plugincars_dict[url]['body'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[4].text
-            self.plugincars_dict[url]['range(mi)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text.find(" ")]
-            self.plugincars_dict[url]['battery_capacity(kWh)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text.find(" ")]
-            self.plugincars_dict[url]['charge_rate(kW)'] =curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")]
-            
-            #base_msrp
-            #tech
-            #body()
-            #battery capacity
-            #charge_rate
-            #fuel_source
-            # try:
-            #self.plugincars_dict[url]['make'] = make
-            #self.plugincars_dict[url]['model'] = model
-            
+            self.plugincars_dict[self.plugincars_car_names_list[i]]['make'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[0:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")]
+            self.plugincars_dict[self.plugincars_car_names_list[i]]['model'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")+1:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" specifications")]
+            self.plugincars_dict[self.plugincars_car_names_list[i]]['base_msrp($)'] = ''.join(x for x in curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[1].text if x.isdigit())
+            self.plugincars_dict[self.plugincars_car_names_list[i]]['tech'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[3].text
+            self.plugincars_dict[self.plugincars_car_names_list[i]]['body'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[4].text
+            self.plugincars_dict[self.plugincars_car_names_list[i]]['range(mi)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text.find(" ")]
+            self.plugincars_dict[self.plugincars_car_names_list[i]]['battery_capacity(kWh)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text.find(" ")]
+            self.plugincars_dict[self.plugincars_car_names_list[i]]['charge_rate(kW)'] =curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")] 
+        
+        
+        # create csv file from the data collected
+        
+        fields =  ['car_name'] + list(list(self.plugincars_dict.values())[0].keys())
+        with open('plugincars.csv','w') as csvfile:
+            writer = csv.DictWriter(csvfile, fields)
+            writer.writeheader()
+            for key in self.plugincars_dict:
+                writer.writerow({field: self.plugincars_dict[key].get(field) or key for field in fields})
+            csvfile.close()
+                        
         #self.plugincars_page_soup = soup(self.plugincars_page_html, "html.parser")
         #must always have in order to add in new parameters to the class
         self.__dict__.update({x:k for x, k in locals().items() if x != 'self'})
-
-    def get_plugincars_names(self):
-        return self.plugincars_names
-        
-        
-# test grabbing information from the page
-vc = VehicleCategorizer()
-#for atag in vc.edmunds_soup.find_all("a"):
-    #print(atag.text)
-
-for url in vc.plugincars_dict.keys():
-    #print("make:", vc.plugincars_dict[url]['make'])
-    #print("make:", vc.plugincars_dict[url]['make'])
-    print("model:",vc.plugincars_dict[url]['model'])
-    print("base_msrp:",vc.plugincars_dict[url]['base_msrp($)'])
-    print("tech:",vc.plugincars_dict[url]['tech'])
-    print("body:",vc.plugincars_dict[url]['body'])
-    print("range:",vc.plugincars_dict[url]['range(mi)'])
-    print("battery_capacity:",vc.plugincars_dict[url]['battery_capacity(kWh)'])
-    print("charge_rate:",vc.plugincars_dict[url]['charge_rate(kW)'])
-#print(vc.plugincars_url_list)
-#print(vc.plugincars_soup)    
