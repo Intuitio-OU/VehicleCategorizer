@@ -27,8 +27,11 @@ class VehicleCategorizerTestCase(unittest.TestCase):
             print("range(mi):", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['range(mi)'])
             print("battery_capacity(kWh):", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['battery_capacity(kWh)'])
             print("charge_rate(kW):", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['charge_rate(kW)'])
-    
-        
+    """
+    def test_plugincars_csv(self):
+        with open('plugincars.csv','r') as csvfile:
+    """
+            
 # main function to run through all of the test function made in the test case
 # use the middle arugrument argv=['first-arg-is-ignored'], exit = False because in ipy/ipynb files
 # unittest.main looks at sys.argv first so you ignore argv so that unittest.main runs

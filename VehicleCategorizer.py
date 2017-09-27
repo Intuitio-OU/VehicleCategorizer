@@ -17,6 +17,7 @@ from bs4 import BeautifulSoup as soup
 import requests as uReq
 import csv
 import time
+import multiprocessing
 # learning curve for scrapy is a bit steeper and it is it's own api, bs4 more prefereable
 # for the sake of developing you're own
 # import scrapy
@@ -85,14 +86,14 @@ class VehicleCategorizer:
             self.plugincars_dict[self.plugincars_car_names_list[i]]['tech'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[3].text
             self.plugincars_dict[self.plugincars_car_names_list[i]]['body'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[4].text
             self.plugincars_dict[self.plugincars_car_names_list[i]]['range(mi)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text.find(" ")]
-            self.plugincars_dict[self.plugincars_car_names_list[i]]['battery_capacity(kWh)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text.find(" ")]
-            self.plugincars_dict[self.plugincars_car_names_list[i]]['charge_rate(kW)'] =curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")] 
+            self.plugincars_dict[self.plugincars_car_names_list[i]]['battery_capacity(kWh)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text.find(" ")] # if len(curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})) < 7 else " "
+            self.plugincars_dict[self.plugincars_car_names_list[i]]['charge_rate(kW)'] =curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")] # if len(curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})) < 8 else " "
         
         
         # create csv file from the data collected
         
         fields =  ['car_name'] + list(list(self.plugincars_dict.values())[0].keys())
-        with open('plugincars.csv','w') as csvfile:
+        with open('plugincars.csv','w', newline = '') as csvfile:
             writer = csv.DictWriter(csvfile, fields)
             writer.writeheader()
             for key in self.plugincars_dict:
@@ -102,3 +103,4 @@ class VehicleCategorizer:
         #self.plugincars_page_soup = soup(self.plugincars_page_html, "html.parser")
         #must always have in order to add in new parameters to the class
         self.__dict__.update({x:k for x, k in locals().items() if x != 'self'})
+
