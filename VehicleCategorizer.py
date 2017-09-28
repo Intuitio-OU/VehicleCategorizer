@@ -86,7 +86,8 @@ class VehicleCategorizer:
             self.plugincars_dict[self.plugincars_car_names_list[i]]['tech'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[3].text
             self.plugincars_dict[self.plugincars_car_names_list[i]]['body'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[4].text
             self.plugincars_dict[self.plugincars_car_names_list[i]]['range(mi)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text.find(" ")]
-            self.plugincars_dict[self.plugincars_car_names_list[i]]['battery_capacity(kWh)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text.find(" ")] # if len(curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})) < 7 else " "
+            self.plugincars_dict[self.plugincars_car_names_list[i]]['battery_capacity(kWh)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text.find(" ")]
+            print("battery_cap", self.plugincars_dict[self.plugincars_car_names_list[i]]['battery_capacity(kWh)'])
             self.plugincars_dict[self.plugincars_car_names_list[i]]['charge_rate(kW)'] =curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")] # if len(curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})) < 8 else " "
         
         
