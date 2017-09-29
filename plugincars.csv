@@ -14,7 +14,7 @@ Fiat 500e,Fiat,500e,32600,Electric Vehicle,Coupe,84,24,6.6
 Ford C-Max Energi,Ford,C-Max Energi,27100,Plug-in Hybrid,Wagon/Van,20,8,3.3
 Ford Focus Electric,Ford,Focus Electric,29200,Electric Vehicle,Sedan,115,23,6.6
 Ford Fusion Energi,Ford,Fusion Energi,33900,Plug-in Hybrid,Sedan,19,7,3.3
-Honda Clarity Electric,Honda,Clarity Electric,Honda Clarity Electric,Electric Vehicle,Sedan,89,25,Honda Clarity Electric
+Honda Clarity Electric,Honda,Clarity Electric,Honda Clarity Electric,Electric Vehicle,Sedan,89,25,-1
 Hyundai Ioniq,Hyundai,Ioniq,29500,Electric Vehicle,Sedan,124,28,7.0
 Hyundai Sonata Plug-in Hybrid,Hyundai,Sonata Plug-in Hybrid,35400,Plug-in Hybrid,Sedan,27,10,3.3
 Kia Optima Plug-in Hybrid,Kia,Optima Plug-in Hybrid,35200,Plug-in Hybrid,Sedan,29,10,3.3
@@ -27,7 +27,7 @@ Mini Cooper S E Countryman ALL4,Mini,Cooper S E Countryman ALL4,37700,Plug-in Hy
 Nissan LEAF,Nissan,LEAF,29000,Electric Vehicle,Sedan,107,30,6.6
 Porsche Cayenne S E-Hybrid,Porsche,Cayenne S E-Hybrid,78000,Plug-in Hybrid,SUV,14,11,3.6
 Smart Electric Drive,Smart,Electric Drive,23800,Electric Vehicle,Coupe,58,17,7.2
-Tesla Model 3,Tesla,Model 3,35000,Electric Vehicle,Sedan,220,-1,Tesla Model 3
+Tesla Model 3,Tesla,Model 3,35000,Electric Vehicle,Sedan,220,-1,-1
 Tesla Model S,Tesla,Model S,71000,Electric Vehicle,Sedan,315,100,10.0
 Tesla Model X,Tesla,Model X,80000,Electric Vehicle,SUV,289,100,17.0
 Toyota Prius Prime (Plug-in Hybrid),Toyota,Prius Prime (Plug-in Hybrid),28000,Plug-in Hybrid,Sedan,25,9,3.3

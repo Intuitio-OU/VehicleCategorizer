@@ -80,6 +80,7 @@ class VehicleCategorizer:
             curr_plugincars_soup  = soup(curr_plugincars_client.content, "html.parser")
             # start sorintg out each of the pieces of information from the main soup
             # and individual car soup
+            # there is an option to put the keys into the 
             self.plugincars_dict[self.plugincars_car_names_list[i]]['make'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[0:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")]
             self.plugincars_dict[self.plugincars_car_names_list[i]]['model'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")+1:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" specifications")]
             self.plugincars_dict[self.plugincars_car_names_list[i]]['base_msrp($)'] = ''.join(x for x in curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[1].text if x.isdigit())
@@ -88,10 +89,8 @@ class VehicleCategorizer:
             self.plugincars_dict[self.plugincars_car_names_list[i]]['range(mi)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text.find(" ")]
             self.plugincars_dict[self.plugincars_car_names_list[i]]['battery_capacity(kWh)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text.find(" ")] if curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text.find(" ")] != '' else '-1'
             self.plugincars_dict[self.plugincars_car_names_list[i]]['charge_rate(kW)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")] if curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")] != '' else "-1"
-        
-        
-        # create csv file from the data collected
-        
+                
+        # create csv file from the data collected        
         fields =  ['car_name'] + list(list(self.plugincars_dict.values())[0].keys())
         with open('plugincars.csv','w', newline = '') as csvfile:
             writer = csv.DictWriter(csvfile, fields)
