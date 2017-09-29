@@ -33,7 +33,6 @@ class VehicleCategorizerTestCase(unittest.TestCase):
         except IndexError:
             print("You're over indexing in the amount of variable that are available in the car name list.")
         
-        
     """
     def test_plugincars_csv(self):
         with open('plugincars.csv','r') as csvfile:
