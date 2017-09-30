@@ -13,12 +13,22 @@ import unittest
 class VehicleCategorizerTestCase(unittest.TestCase):
     # create a setup function
     def setUp(self):
-        self.vc = VehicleCategorizer.VehicleCategorizer()
-    
-    
-    # test the information scraped from the plugincars website    
+        try:
+            self.vCat = VehicleCategorizer.VehicleCategorizer()
+        except ImportError as err:
+            print
+     
+   # test the information scraped from the plugincars website    
     def test_plugincars(self):
         try:
+            self.vCat.scrapePlugincars('test_plugincars.csv')
+        except KeyError as err:
+            print("Check the dictionary keys")
+        except IndexError:
+            print("You're over indexing in the amount of variable that are available in the car name list.")
+        
+                
+            """
             for i in range(len(self.vc.plugincars_car_names_list)):
                 print("make:", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['make'])
                 print("model:", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['model'])
@@ -28,10 +38,7 @@ class VehicleCategorizerTestCase(unittest.TestCase):
                 print("range(mi):", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['range(mi)'])
                 print("battery_capacity(kWh):", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['battery_capacity(kWh)'])
                 print("charge_rate(kW):", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['charge_rate(kW)'])
-        except KeyError as err:
-            print("You're most likely calling a key wrong if you're getting this error:", err)
-        except IndexError:
-            print("You're over indexing in the amount of variable that are available in the car name list.")
+            """
         
     """
     def test_plugincars_csv(self):
