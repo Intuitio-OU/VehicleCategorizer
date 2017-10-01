@@ -28,7 +28,7 @@ import multiprocessing
 # http://www.pythonforbeginners.com/beautifulsoup/beautifulsoup-4-python
 
 class VehicleCategorizer:
-    def __init__(self, maxScrapeAttempts = 10):
+    def __init__(self, maxRequests = 10):
         # list container for URLs
         self.urlList=[]		
         # dict container for URLs
@@ -40,6 +40,7 @@ class VehicleCategorizer:
         self.topspeedUrlDict={}
         #self.jdpowerUrlDict={}
         self.plugincars_dict=collections.defaultdict(dict)
+        self.plugincars_url_list = []
         
         # counters for successful hits and failures
         self.successCounter = 0
@@ -63,50 +64,43 @@ class VehicleCategorizer:
         # and the other url is for appeniding the url of individual car page
         plugincars_url = "http://www.plugincars.com"
         plugincars_base_url = "http://www.plugincars.com/cars"
-        # get contents of plugincars.com
+        # list to contain all of the urls scraped from the main plugincars page
+        plugincars_car_names_list = []
+        # attempt to reach the plugincars site
         while True:
             try:
-                uReq.get(plugincars_base_url)
-                
+                plugincarsClient = uReq.get(plugincars_base_url)
+                plugincars_soup = soup(plugincarsClient.content, 'html.parser')
+                # get first instance of a divider with class = car-a so that you can attempt to
+                # scrape it's webpage
+                div = plugincars_soup.find("div", {"class" : "car-a"})
+                curr_plugincars_client = uReq.get(plugincars_url+div.h3.a['href'])
+                curr_plugincars_soup  = soup(curr_plugincars_client.content, "html.parser")
             except Exception as err:
                 self.failureCounter += 1
                 if self.failureCounter > self.maxRequests:
                     print('Requests failed for plugincars, check site or possibly drop requests rate.')
                     break
             else: break
-            
+        # now that  you know you can reach the site, it's contents
         plugincarsClient = uReq.get(plugincars_base_url)
         # get webpage html contents
         # need the html.parser to get all of the information from this specific page
-        while True:
-            try:
-                soup(plugincarsClient.content, 'html.parser')
-            except Exception as err:
-                self.failureCounter += 1
-                if self.failureCounter > self.maxRequests:
-                    print('Something is very wrong, refer to this',err)
-                    break
-            else: break
         plugincars_soup = soup(plugincarsClient.content, 'html.parser')
-        # list to contain all of the urls scraped from the main plugincars page
-        plugincars_url_list = []
-        plugincars_car_names_list = []
         # plugincars divides up the individual cars into dividers with a mutual class of car-a
         # that being said, the names of each car is found under h3's text
         # print("got to the loop")
         for div in plugincars_soup.findAll("div", {"class" : "car-a"}):
             # get href to get the partial url to see the full details of each vehicle
-            plugincars_url_list.append(plugincars_url+div.h3.a['href'])
+            self.plugincars_url_list.append(plugincars_url+div.h3.a['href'])
             plugincars_car_names_list.append(div.h3.a.text)
         # plugincars urls are used to create their individual soups so that they can be parsed
-        for i in range(len(plugincars_url_list)):
+        for i in range(len(self.plugincars_url_list)):
             # need to form a new client in order to get the soup from each url and then
             curr_plugincars_client = uReq.get(self.plugincars_url_list[i])
             # need to get the form the soup to scrape from the individual urls
             curr_plugincars_soup  = soup(curr_plugincars_client.content, "html.parser")
-            # start sorintg out each of the pieces of information from the main soup
-            # and individual car soup
-            # there is an option to put the keys into the
+            # start sorintg out each of the pieces of information from the main plugincars soup and individual car soup
             curr_car_dict = self.plugincars_dict[plugincars_car_names_list[i]]
             curr_car_dict['make'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[0:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")]
             curr_car_dict['model'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")+1:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" specifications")]
@@ -126,8 +120,8 @@ class VehicleCategorizer:
             writer.writeheader()
             for key in self.plugincars_dict: writer.writerow({field: self.plugincars_dict[key].get(field) or key for field in fieldnames})
         csvfile.close()
-        
     
+    # reset the counters for each    
     def __initScrape__(self):
         self.successCounter = 0
         self.failureCounter = 0
