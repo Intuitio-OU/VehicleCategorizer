@@ -13,18 +13,18 @@ import unittest
 class VehicleCategorizerTestCase(unittest.TestCase):
     # create a setup function
     def setUp(self):
-        try:
-            self.vCat = VehicleCategorizer.VehicleCategorizer()
+        try: VehicleCategorizer.VehicleCategorizer()
         except ImportError as err:
-            print
+            print("Are you even importing the correct class.")
+        self.vCat = VehicleCategorizer.VehicleCategorizer()
      
    # test the information scraped from the plugincars website    
     def test_plugincars(self):
+        
         try: self.vCat.scrapePlugincars('test_plugincars.csv')
         except KeyError as err: print("Check the dictionary keys")
         except IndexError: print("You're over indexing in the amount of variable that are available in the car name list.")
-        
-                
+        self.vCat.scrapePlugincars('test_plugincars.csv')
         """
         for i in range(len(self.vc.plugincars_car_names_list)):
             print("make:", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['make'])
