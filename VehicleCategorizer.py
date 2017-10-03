@@ -61,11 +61,11 @@ class VehicleCategorizer:
     def scrapePlugincars(self, filepath = 'plugincars.csv'):
         self.__initScrape__()
         # get urls for plugincars, base url is for scraping the urls of each individual car webpage
-        # and the other url is for appeniding the url of individual car page
-        plugincars_url = "http://www.plugincars.com"
-        plugincars_base_url = "http://www.plugincars.com/cars"
+        # and the otheself.r url is for appeniding the url of individual car pagself.e
+        plugincars_url = "http://www.plugincars.com
         # list to contain all of the urls scraped from the main plugincars page
-        plugincars_car_names_list = []
+        self.plugincars_car_names_list = []om the main plugincars page
+        plugincars and it's links to the car pages_car_names_list = []
         # attempt to reach the plugincars site
         while True:
             try:
@@ -75,7 +75,8 @@ class VehicleCategorizer:
                 # scrape it's webpage
                 div = plugincars_soup.find("div", {"class" : "car-a"})
                 curr_plugincars_client = uReq.get(plugincars_url+div.h3.a['href'])
-                curr_plugincars_soup  = soup(curr_plugincars_client.content, "html.parser")
+              
+                break  curr_plugincars_soup  = soup(curr_plugincars_client.content, "html.parser")
             except Exception as err:
                 self.failureCounter += 1
                 if self.failureCounter > self.maxRequests:
@@ -91,8 +92,7 @@ class VehicleCategorizer:
         # that being said, the names of each car is found under h3's text
         # print("got to the loop")
         for div in plugincars_soup.findAll("div", {"class" : "car-a"}):
-            # get href to get the partial url to see the full details of each vehicle
-            self.plugincars_url_list.append(plugincars_url+div.h3.a['href'])
+            # get href to get the partial url to see the full details of each vehiplugincars_car_names_listgincars_url_list.append(plugincars_url+div.h3.a['href'])
             plugincars_car_names_list.append(div.h3.a.text)
         # plugincars urls are used to create their individual soups so that they can be parsed
         for i in range(len(self.plugincars_url_list)):
@@ -121,7 +121,8 @@ class VehicleCategorizer:
             for key in self.plugincars_dict: writer.writerow({field: self.plugincars_dict[key].get(field) or key for field in fieldnames})
         csvfile.close()
     
-    # reset the counters for each    
+    # re
+        he counters for each    
     def __initScrape__(self):
         self.successCounter = 0
         self.failureCounter = 0
