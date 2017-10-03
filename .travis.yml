@@ -1,11 +1,7 @@
 language: python
 sudo: enabled
 python:
-  -2.7
-  -3.2
-  -3.3
-  -3.4
-  -3.5
+  - "3.2"
 install:
   pip3 install unittest
 script: python test_VehicleCategorizerTestCase.py
