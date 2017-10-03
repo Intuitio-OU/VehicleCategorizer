@@ -1,6 +1,33 @@
 language: python
-python:
-  -3.2
-install:
-  - pip install unittest
+env:
+  global:
+    - CI=true
+
+matrix:
+  include:
+    - os: linux
+      python: 3.5
+
+    - os: osx
+      sudo: required
+      language: generic
+
+#  Manually install python on osx
+install: |
+  if [[ $TRAVIS_OS_NAME == 'osx' ]]; then
+
+      brew update;
+      brew install python3;
+      python3 -m venv venv;
+      source venv/bin/activate;
+      pip install unittest
+
+  else
+      pip install unittest
+  fi
+
 script: python test_VehicleCategorizerTestCase.py
+
+branches:
+  only:
+    - master
