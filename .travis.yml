@@ -1,5 +1,4 @@
 language: python
-os: ubuntu
 python:
   -3.3
 install:
