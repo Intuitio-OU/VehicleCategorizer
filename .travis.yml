@@ -3,5 +3,5 @@ sudo: enabled
 python:
   - "3.2"
 install:
-  pip3 install unittest
+  pip install unittest
 script: python test_VehicleCategorizerTestCase.py
