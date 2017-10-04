@@ -156,3 +156,5 @@ class VehicleCategorizer:
     # reset the failCounter so that you keep attempting to scrape the site until you get a hit
     def __initTry__(self):
         self.failCounter = 0
+        
+        

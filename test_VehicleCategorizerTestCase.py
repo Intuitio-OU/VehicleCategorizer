@@ -13,29 +13,15 @@ import unittest
 class VehicleCategorizerTestCase(unittest.TestCase):
     # create a setup function
     def setUp(self):
-        try: VehicleCategorizer.VehicleCategorizer()
+        try: self.vCat = VehicleCategorizer.VehicleCategorizer()
         except ImportError as err:
             print("Are you even importing the correct class.")
-        self.vCat = VehicleCategorizer.VehicleCategorizer()
      
-   # test the information scraped from the plugincars website    
+    # test the information scraped from the plugincars website    
     def test_plugincars(self):
-        
         try: self.vCat.scrapePlugincars('test_plugincars.csv')
         except KeyError as err: print("Check the dictionary keys")
         except IndexError: print("You're over indexing in the amount of variable that are available in the car name list.")
-        self.vCat.scrapePlugincars('test_plugincars.csv')
-        """
-        for i in range(len(self.vc.plugincars_car_names_list)):
-            print("make:", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['make'])
-            print("model:", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['model'])
-            print("base_msrp($):", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['base_msrp($)'])
-            print("tech:", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['tech'])
-            print("body:",self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['body'])
-            print("range(mi):", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['range(mi)'])
-            print("battery_capacity(kWh):", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['battery_capacity(kWh)'])
-            print("charge_rate(kW):", self.vc.plugincars_dict[self.vc.plugincars_car_names_list[i]]['charge_rate(kW)'])
-        """
         
     """
     def test_plugincars_csv(self):
