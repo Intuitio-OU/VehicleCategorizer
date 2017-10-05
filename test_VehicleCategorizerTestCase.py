@@ -29,7 +29,7 @@ class VehicleCategorizerTestCase(unittest.TestCase):
             # print the information collected during the test so that I can
             # manually check the information
             self.vCat.printPlugincarsDict()
-            print('\nScrapePlugincars exec time: %.2f\n'%(end-start))
+            print('\nScrapePlugincars exec time: %.2fs\n'%(end-start))
             """
             start = time.time()
             self.vCat.scrapePlugincars('test_plugincars.csv')
@@ -46,7 +46,7 @@ class VehicleCategorizerTestCase(unittest.TestCase):
             start = time.time()
             self.vCat.makeEdmundsUrlList()
             end = time.time()
-            print('\nMake Edmunds Url List exec time: %.2f\n'%(end-start))
+            print('\nMake Edmunds Url List exec time: %.2fs\n'%(end-start))
         except Exception as e:
             print(e)
     """

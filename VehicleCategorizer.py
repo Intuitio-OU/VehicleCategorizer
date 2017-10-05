@@ -166,17 +166,21 @@ class VehicleCategorizer:
         self.edmunds_url_list = []
         self.edmunds_car_names_list = []
         self.__initTry__()
-        while True:
-            try:
-                self.edmundsClient = uReq.get(self.edmunds_url)
-                self.edmundsSoup = soup(self.edmundsClient.content, 'html.parser')
-                pprint.pprint(self.edmundsSoup)
-                break
-            except Exception as e:
-                self.failCounter += 1
-                if self.failCounter >= self.maxFail:
-                    print("There is something wrong:", e)
-                    break
+        try:
+            self.edmundsClient = uReq.get(self.edmunds_url)
+            self.edmundsSoup = soup(self.edmundsClient.content, 'html.parser')
+            self.edmundsLinks = self.edmundsSoup.find_all('a')
+            counter = 0
+            for a in self.edmundsLinks:
+                print("atag href:",counter,a['href'])
+                counter+=1
+            #self.edmunds_car_make =
+            #self.edmunds_car_model =
+            #self.edmunds_car_year = 
+        except Exception as e:
+            self.failCounter += 1
+            if self.failCounter >= self.maxFail:
+                print("There is something wrong:", e)
                 
     
     # reset the failCounter so that you keep attempting to scrape the site until you get a hit
