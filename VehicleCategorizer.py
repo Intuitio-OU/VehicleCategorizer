@@ -13,9 +13,11 @@ import collections
 # from ratelimit import *
 from bs4 import BeautifulSoup as soup
 import requests as uReq
+import pprint
 import csv
 import time
 import multiprocessing
+import json
 # learning curve for scrapy is a bit steeper and it is it's own api, bs4 more prefereable
 # for the sake of developing you're own
 # import scrapy
@@ -100,7 +102,9 @@ class VehicleCategorizer:
                 print('scrapePluginCars error\n')
                 break
             
-    # get all of the information from the lugincars site    
+    # get all of the information from the lugincars site
+    # while scraping, if a cell returns -1, it means that the information
+    # for this specific section was blank    
     def scrapePlugincars(self, filepath = 'plugincars.csv'):
         # reset the fail counter
         self.__initTry__()
@@ -152,7 +156,29 @@ class VehicleCategorizer:
             if self.failCounter == self.maxFail:
                 print('scrapePluginCars error\n')
                 break
-            
+    
+    def printPlugincarsDict(self):
+        pprint.pprint(dict(self.plugincars_dict))
+    
+    # create the urls so that you can use the requests function to scrape the edmunds site
+    def makeEdmundsUrlList(self):
+        self.edmunds_url = 'https://www.edmunds.com/'
+        self.edmunds_url_list = []
+        self.edmunds_car_names_list = []
+        self.__initTry__()
+        while True:
+            try:
+                self.edmundsClient = uReq.get(self.edmunds_url)
+                self.edmundsSoup = soup(self.edmundsClient.content, 'html.parser')
+                pprint.pprint(self.edmundsSoup)
+                break
+            except Exception as e:
+                self.failCounter += 1
+                if self.failCounter >= self.maxFail:
+                    print("There is something wrong:", e)
+                    break
+                
+    
     # reset the failCounter so that you keep attempting to scrape the site until you get a hit
     def __initTry__(self):
         self.failCounter = 0

@@ -8,21 +8,47 @@ Created on Mon Sep 25 15:35:52 2017
 # get the vehivlecategorizer and unittest classes
 import VehicleCategorizer
 import unittest
+import time
+import multiprocessing
 
 # generate the testcase
 class VehicleCategorizerTestCase(unittest.TestCase):
     # create a setup function
     def setUp(self):
-        try: self.vCat = VehicleCategorizer.VehicleCategorizer()
-        except ImportError as err:
-            print("Are you even importing the correct class.")
+        try:
+            self.vCat = VehicleCategorizer.VehicleCategorizer()
+        except ImportError as err: print("Check that you imported the VehicleCategorizer class and that it's in the same folder as this test script.")
      
     # test the information scraped from the plugincars website    
+    @unittest.skip("not looking at plugincars at the moment")
     def test_plugincars(self):
-        try: self.vCat.scrapePlugincars('test_plugincars.csv')
+        try:
+            start = time.time()
+            self.vCat.scrapePlugincars('test_plugincars.csv')
+            end = time.time()
+            # print the information collected during the test so that I can
+            # manually check the information
+            self.vCat.printPlugincarsDict()
+            print('\nScrapePlugincars exec time: %.2f\n'%(end-start))
+            """
+            start = time.time()
+            self.vCat.scrapePlugincars('test_plugincars.csv')
+            end = time.time()
+            print('\nPlugincars exec time: %.2f\n'%(end-start))
+            """
+            
         except KeyError as err: print("Check the dictionary keys")
         except IndexError: print("You're over indexing in the amount of variable that are available in the car name list.")
         
+    
+    def test_edmunds(self):
+        try:
+            start = time.time()
+            self.vCat.makeEdmundsUrlList()
+            end = time.time()
+            print('\nMake Edmunds Url List exec time: %.2f\n'%(end-start))
+        except Exception as e:
+            print(e)
     """
     def test_plugincars_csv(self):
         with open('plugincars.csv','r') as csvfile:
