@@ -8,7 +8,7 @@ install:
 script: python test_VehicleCategorizerTestCase.py
 notifications:
     email:
-    recipients:
-      - matt.anderson.inf.debug@gmail.com
-    on_success: always # default: change
-    on_failure: always # default: always
+        recipients:
+          - matt.anderson.inf.debug@gmail.com
+        on_success: always # default: change
+        on_failure: always # default: always
