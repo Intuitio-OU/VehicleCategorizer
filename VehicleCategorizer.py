@@ -129,7 +129,6 @@ class VehicleCategorizer:
                     curr_car_dict['range(mi)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[6].text.find(" ")]
                     curr_car_dict['battery_capacity(kWh)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text.find(" ")] if curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[7].text.find(" ")] != '' else '-1'
                     curr_car_dict['charge_rate(kW)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")] if curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")] != '' else "-1"
-                break
                 # create csv file from the data collected
                 # intialize a list for the parameters that classify your values        
                 fieldnames =  ['car_name'] + list(list(self.plugincars_dict.values())[0].keys())
@@ -169,18 +168,31 @@ class VehicleCategorizer:
         try:
             self.edmundsClient = uReq.get(self.edmunds_url)
             self.edmundsSoup = soup(self.edmundsClient.content, 'html.parser')
-            self.edmundsLinks = self.edmundsSoup.find_all('a')
-            counter = 0
+            self.edmundsLinks = self.edmundsSoup.find_all('a')[7:113]
+            testMakeLink = self.edmundsLinks[0]['href'][1:]
+            testMakeClient = uReq.get(self.edmunds_url+testMakeLink)
+            testMakeSoup = soup(testMakeClient.content, 'html.parser')
+            testYearLink = testMakeSoup.find('div',{'class' : "card-img"}).a['href']
+            print(testYearLink)
+            tYearClient = uReq.get(self.edmunds_url+testYearLink[1:])
+            tYearSoup = soup(tYearClient.content, 'html.parser')
+            print(tYearSoup.find_all('li'))#.find('li',{'class':'py-0_25'}))
+            
+            # this is for getting the soup of each make url
+            """
             for a in self.edmundsLinks:
-                print("atag href:",counter,a['href'])
-                counter+=1
+                edmundsMakesClient = uReq.get(self.edmunds_url+a['href'][1:])
+                edmundsMakesSoup = soup(edmundsMakesClient.content, 'html.parser')
+                edmundsYearLinks = edmundsMakesSoup.find_all('div', { "class" : "card-container" })
+                print(edmundsYearLinks)
+            """
             #self.edmunds_car_make =
             #self.edmunds_car_model =
-            #self.edmunds_car_year = 
+            #self.edmunds_car_year =
         except Exception as e:
-            self.failCounter += 1
-            if self.failCounter >= self.maxFail:
-                print("There is something wrong:", e)
+            # self.failCounter += 1
+            #if self.failCounter >= self.maxFail:
+            print("There is something wrong:", e)
                 
     
     # reset the failCounter so that you keep attempting to scrape the site until you get a hit
