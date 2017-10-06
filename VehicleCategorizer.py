@@ -163,7 +163,7 @@ class VehicleCategorizer:
     # create the urls so that you can use the requests function to scrape the edmunds site
     def makeEdmundsUrlList(self):
         self.edmunds_url = 'https://www.edmunds.com/'
-        self.edmunds_url_list = []
+        self.edmunds_url_set = set()
         self.edmunds_car_names_list = []
         self.__initTry__()
         try:
@@ -171,51 +171,54 @@ class VehicleCategorizer:
             self.edmundsSoup = soup(self.edmundsClient.content, 'html.parser')
             # this is the cleanest solution because it is possible that the site can add more car makes later but stable for extracting data in the mean time
             self.edmundsLinks = self.edmundsSoup.find_all('a')[7:113]
-            testMakeLink = self.edmundsLinks[0]['href'][1:]
-            testMakeClient = uReq.get(self.edmunds_url+testMakeLink)
-            testMakeSoup = soup(testMakeClient.content, 'html.parser')
-            # add findall
-            testYearLink = testMakeSoup.find('div',{'class' : "card-img"}).a['href']
-            # test progress at this step
-            print(testYearLink)
-            tYearClient = uReq.get(self.edmunds_url+testYearLink[1:])
-            tYearSoup = soup(tYearClient.content, 'html.parser')
-            li_tYearSoup = set(tYearSoup.find_all('li', {'class' : 'medium'}))
-            tYearLink =[]
-            for li in li_tYearSoup:
-                print('li_tYearLink raw:',li.a['href'])
-                if li.a['href'].find('used/') != -1:
-                    tYearLink.append(li.a['href'][1:])
-                else:
-                    slCount = []
-                    index = 0
-                    while index < len(li.a['href']):
-                        index = li.a['href'].find('/', index)
-                        if index == -1:
-                            break
-                        slCount.append(index)
-                        index += 1
-                    if len(slCount) == 5 and (li.a['href'].find('review') == -1 and li.a['href'].find('features-specs') ==-1 and li.a['href'].find('consumer-reviews') and li.a['href'].find('deals') == -1):
-                        tYearLink.append(li.a['href'][1:])
-            print('tYearLink cleaned:')
-            pprint.pprint(tYearLink)
-                    #.find('li',{'class':'py-0_25'}))
-            
-            # this is for getting the soup of each make url
-            """
             for a in self.edmundsLinks:
-                edmundsMakesClient = uReq.get(self.edmunds_url+a['href'][1:])
-                edmundsMakesSoup = soup(edmundsMakesClient.content, 'html.parser')
-                edmundsYearLinks = edmundsMakesSoup.find_all('div', { "class" : "card-container" })
-                print(edmundsYearLinks)
-            """
-            #self.edmunds_car_make =
-            #self.edmunds_car_model =
-            #self.edmunds_car_year =
+                #print('\nedmundsLinks\n')
+                testMakeLink = a['href'][1:]
+                testMakeClient = uReq.get(self.edmunds_url+testMakeLink)
+                testMakeSoup = soup(testMakeClient.content, 'html.parser')
+                testYearLink = testMakeSoup.find_all('div',{'class' : "card-img"})
+                # test progress at this step
+                # print(testYearLink)
+                for yearLink in testYearLink:
+                    # in case the car image isn't available with it's atag skip it
+                    if yearLink.a == None:
+                        continue
+                    tYearClient = uReq.get(self.edmunds_url+yearLink.a['href'][1:])
+                    tYearSoup = soup(tYearClient.content, 'html.parser')
+                    # unstable for in later builds because the format can change
+                    # these classes are randomly generated and edmunds obviously doesn't want people
+                    # scaping without using their own api but it is possible and stable for the
+                    # current build
+                    li_tYearSoup = list(set(tYearSoup.find_all('li', {'class' : 'medium'})))
+                    #pprint.pprint(li_tYearSoup)
+                    tYearLink =[]
+                    for li in li_tYearSoup:
+                        #print('li_tYearSoup\n')
+                        #print('li_tYearLink raw:', li.a['href'])
+                        if li.a['href'].find('used/') != -1:
+                            tYearLink.append(li.a['href'][1:])
+                        else:
+                            slCount = []
+                            index = 0
+                            while index < len(li.a['href']):
+                                index = li.a['href'].find('/', index)
+                                if index == -1:
+                                    break
+                                slCount.append(index)
+                                index += 1
+                            if len(slCount) == 5 and (li.a['href'].find('review') == -1 and li.a['href'].find('features-specs') ==-1 and li.a['href'].find('consumer-reviews') and li.a['href'].find('deals') == -1):
+                                tYearLink.append(li.a['href'][1:])
+                    for link in tYearLink:
+                        print(link)
+                        self.edmunds_url_set.add(self.edmunds_url+link)
+        except TypeError:
+            print("You're hitting an object that is empty.")
+            pass
         except Exception as e:
             # self.failCounter += 1
             #if self.failCounter >= self.maxFail:
             print("There is something wrong:", e)
+        pprint.pprint(self.edmunds_url_set)
                 
     
     # reset the failCounter so that you keep attempting to scrape the site until you get a hit
