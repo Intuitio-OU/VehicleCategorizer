@@ -18,6 +18,7 @@ import csv
 import time
 import multiprocessing
 import json
+import re
 # learning curve for scrapy is a bit steeper and it is it's own api, bs4 more prefereable
 # for the sake of developing you're own
 # import scrapy
@@ -168,15 +169,37 @@ class VehicleCategorizer:
         try:
             self.edmundsClient = uReq.get(self.edmunds_url)
             self.edmundsSoup = soup(self.edmundsClient.content, 'html.parser')
+            # this is the cleanest solution because it is possible that the site can add more car makes later but stable for extracting data in the mean time
             self.edmundsLinks = self.edmundsSoup.find_all('a')[7:113]
             testMakeLink = self.edmundsLinks[0]['href'][1:]
             testMakeClient = uReq.get(self.edmunds_url+testMakeLink)
             testMakeSoup = soup(testMakeClient.content, 'html.parser')
+            # add findall
             testYearLink = testMakeSoup.find('div',{'class' : "card-img"}).a['href']
+            # test progress at this step
             print(testYearLink)
             tYearClient = uReq.get(self.edmunds_url+testYearLink[1:])
             tYearSoup = soup(tYearClient.content, 'html.parser')
-            print(tYearSoup.find_all('li'))#.find('li',{'class':'py-0_25'}))
+            li_tYearSoup = set(tYearSoup.find_all('li', {'class' : 'medium'}))
+            tYearLink =[]
+            for li in li_tYearSoup:
+                print('li_tYearLink raw:',li.a['href'])
+                if li.a['href'].find('used/') != -1:
+                    tYearLink.append(li.a['href'][1:])
+                else:
+                    slCount = []
+                    index = 0
+                    while index < len(li.a['href']):
+                        index = li.a['href'].find('/', index)
+                        if index == -1:
+                            break
+                        slCount.append(index)
+                        index += 1
+                    if len(slCount) == 5 and (li.a['href'].find('review') == -1 and li.a['href'].find('features-specs') ==-1 and li.a['href'].find('consumer-reviews') and li.a['href'].find('deals') == -1):
+                        tYearLink.append(li.a['href'][1:])
+            print('tYearLink cleaned:')
+            pprint.pprint(tYearLink)
+                    #.find('li',{'class':'py-0_25'}))
             
             # this is for getting the soup of each make url
             """
