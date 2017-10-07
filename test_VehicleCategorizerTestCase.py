@@ -20,7 +20,7 @@ class VehicleCategorizerTestCase(unittest.TestCase):
         except ImportError as err: print("Check that you imported the VehicleCategorizer class and that it's in the same folder as this test script.")
      
     # test the information scraped from the plugincars website    
-    @unittest.skip("not looking at plugincars at the moment")
+    #@unittest.skip("Skip plugincars for this test.")
     def test_plugincars(self):
         try:
             start = time.time()
@@ -30,17 +30,11 @@ class VehicleCategorizerTestCase(unittest.TestCase):
             # manually check the information
             self.vCat.printPlugincarsDict()
             print('\nScrapePlugincars exec time: %.2fs\n'%(end-start))
-            """
-            start = time.time()
-            self.vCat.scrapePlugincars('test_plugincars.csv')
-            end = time.time()
-            print('\nPlugincars exec time: %.2f\n'%(end-start))
-            """
-            
         except KeyError as err: print("Check the dictionary keys")
         except IndexError: print("You're over indexing in the amount of variable that are available in the car name list.")
-        
-    
+     
+    # test the information collected from the edmunds site (still in progress)
+    #@unittest.skip("Skip edmunds for this test.")
     def test_edmunds(self):
         try:
             start = time.time()

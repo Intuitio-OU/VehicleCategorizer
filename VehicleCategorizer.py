@@ -139,6 +139,7 @@ class VehicleCategorizer:
                     writer.writeheader()
                     for key in self.plugincars_dict: writer.writerow({field: self.plugincars_dict[key].get(field) or key for field in fieldnames})
                 csvfile.close()
+                break
             # raise awareness if there's an issue connecting to the site
             except uReq.exceptions.TooManyRedirects:
                 self.failCounter += 1
@@ -209,7 +210,6 @@ class VehicleCategorizer:
                             if len(slCount) == 5 and (li.a['href'].find('review') == -1 and li.a['href'].find('features-specs') ==-1 and li.a['href'].find('consumer-reviews') and li.a['href'].find('deals') == -1):
                                 tYearLink.append(li.a['href'][1:])
                     for link in tYearLink:
-                        print(link)
                         self.edmunds_url_set.add(self.edmunds_url+link)
         except TypeError:
             print("You're hitting an object that is empty.")
