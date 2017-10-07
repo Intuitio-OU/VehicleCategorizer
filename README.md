@@ -4,30 +4,20 @@
 Pull information from different websites about vehicles, need to specify the sites.
 
 Information that is important to consider when looking at cars include mileage, safety rating, and mpg. This program is
-specicifically tailored towards pulling infromation about electric vehicles like battery capacity, safety rating, model
-brand/manufaturer, price(leasing and buying), heating, ac, mileage (new or used), year, space, type (sedan, suv), etc. Electric cars in particular.
+specicifically tailored towards pulling infromation vehicles ranging from make, model, year, trim, base msrp, and mpg/ range.
 
-Web scraping to be implemented on websites like google, google+, plugincars, and jdpower.
+Web scraping to be implemented on websites like google, google+, plugincars, jdpower, and edmunds.
 Possible expansions with googlescraper being able to access more search engines
 
-There are pros and cons to using some libraries so rather than scower the internet for information on each library,
-here are the purposes and pros and cons of each used library (some libraries may not be used by the end but
-keep out of convenience of knowledge)
+- BeatifulSoup from bs4: a fast and flexible parser for being able to access data from html and xml documents (this is probably what's going to be doing most of the heav lifting)
+- requests: extract text from webpages
+- ratelimit: library for constraining the scrape rate to prevent getting bloacked
+- unittest: testing library
+- time: track run time of all functions implemented
+- tests currenlty demonstrate the ablility to generate urls for from the plugincars and edmunds sites and can extract a dataset from
+  the plugincars site, scraping and generating urls for other sites are still in progress
 
-To utilize the vehicle api, generate a dataset in their format that their api banks off of
-(Make, Model, Year, Trim, Style)
-
-- BeatifulSoup from bs4 library which is a fast and flexible parser for being able to access data from html and xml documents (this is probably what's going to be doing most of the heav lifting)
-- url open from urllib2/urllib to form client page
-- html library from lxml allows python to access webpage (possibly won't use since BeautifulSoup and urlib may fulfill all necessary puposes)
-- requests to extract text from webpages
-- ratelimit library for constraining the scrape rate to prevent getting bloacked
-- selenium library for web automation tools
-- googlescraper is a custom python library from a github account that allows for the parsing of data in mutliple search engines including but limited to google
-- xgoogle is tailored to google search engine specifically for web scraping
-- scrapy is a web scraping library that can be implemented (need more details)
-
-General consensus from multiple sites is that the main 2 libraries required are urllib/urllib2 and bs4 for the sake of urlopen and BeautifulSoup.
+General consensus from multiple sites is that the main 2 libraries required are requests and bs4.
 
 # References
 http://developer.edmunds.com/api-documentation/vehicle/
@@ -38,5 +28,4 @@ https://www.youtube.com/watch?v=XQgXKtPSzUI
 https://github.com/DanielHabib/VenueCategorizer
 https://www.analyticsvidhya.com/blog/2015/10/beginner-guide-web-scraping-beautiful-soup-python/
 http://www.catonmat.net/blog/python-library-for-google-search/
-
 
