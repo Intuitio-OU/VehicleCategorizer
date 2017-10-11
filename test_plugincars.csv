@@ -1,4 +1,4 @@
-car_name,name,make,model,base_msrp($),tech,body,range(mi),battery_capacity(kWh),charge_rate(kW)
+name,name,make,model,base_msrp($),tech,body,range(mi),battery_capacity(kWh),charge_rate(kW)
 Audi A3 E-Tron,Audi A3 E-Tron,Audi,A3 E-Tron,38900,Plug-in Hybrid,Luxury,16,9,3.3
 BMW 330e,BMW 330e,BMW,330e,43700,Plug-in Hybrid,Sedan,14,7,3.7
 BMW 530e,BMW 530e,BMW,530e,52400,Plug-in Hybrid,Sedan,31,9,3.3

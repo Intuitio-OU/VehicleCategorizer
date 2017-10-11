@@ -40,6 +40,8 @@ class VehicleCategorizer:
         # get connections to the databases of each site that was scraped
         self.mongoClient = MongoClient('localhost', 27017)
         self.edmundsDB = self.mongoClient['edmundsDatabase']
+        self.plugincarsDB = self.mongoClient['plugincarsDatabase']
+        self.collection_plugincars = self.plugincarsDB['vehicles']
         
         # counters for successful hits and failures
         
@@ -72,10 +74,8 @@ class VehicleCategorizer:
         self.plugincars_url_list = []
         self.plugincars_car_names_list = []
         
-        """
-        self.makeConnectionToPlugincarsDB()
-        self.collection_plugincars
-        """
+        #self.makeConnectionToPlugincarsDB()
+        
         # remember to add try catch for attempting parse the plugincars site
         #while True:
         try:
@@ -114,7 +114,7 @@ class VehicleCategorizer:
         # reset the fail counter
         self.__initTry__()
         self.makePlugincarsUrlList()
-        self.makeConnectionToPlugincarsDB()
+        #self.makeConnectionToPlugincarsDB()
         #while True:
         try:
             # plugincars urls are used to create their individual soups so that they can be parsed
@@ -138,7 +138,7 @@ class VehicleCategorizer:
                 curr_car_dict['charge_rate(kW)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")] if curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")] != '' else "-1"
             # create csv file from the data collected
             # intialize a list for the parameters that classify your values        
-            fieldnames =  ['car_name'] + list(list(self.plugincars_dict.values())[0].keys())
+            fieldnames =  ['name'] + list(list(self.plugincars_dict.values())[0].keys())
             # write the collected information in the dictionary for plugincars into a csv file labeled plugincars.csv
             with open(filepath,'w', newline ='') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames)
@@ -165,6 +165,9 @@ class VehicleCategorizer:
                 print('scrapePluginCars error\n')
                 break
             """
+
+        test = self.collection_plugincars.insert_many(list(self.plugincars_dict.values()))
+        #self.fillPlugincarsDB()
     
     def printPlugincarsDict(self):
         pprint.pprint(dict(self.plugincars_dict))
@@ -226,7 +229,7 @@ class VehicleCategorizer:
             # self.failCounter += 1
             #if self.failCounter >= self.maxFail:
             print("There is something wrong:", e)
-        pprint.pprint(self.edmunds_url_set)
+        #pprint.pprint(self.edmunds_url_set)
         
     """    
     def scrapeEdmunds(self):
@@ -235,13 +238,14 @@ class VehicleCategorizer:
             # parameters: make, model, year, trim, new vs. used, mpg, msrp
     """
             
-    def makeConnectionToPlugincarsDB(self):
-        self.plugincarsDB = self.mongoClient['plugincarsDatabase']
-        self.collection_plugincars = self.plugincarsDB['vehicle']
+    #def makeConnectionToPlugincarsDB(self):
+        
+        
+    #def fillPlugincarsDB(self):
+        # fill mongo database with the information collected on each vehicle
         
     
     # reset the failCounter so that you keep attempting to scrape the site until you get a hit
     def __initTry__(self):
         self.failCounter = 0
-        
         

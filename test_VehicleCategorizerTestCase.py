@@ -29,7 +29,8 @@ class VehicleCategorizerTestCase(unittest.TestCase):
             # print the information collected during the test so that I can
             # manually check the information
             #self.vCat.printPlugincarsDict()
-            pprint(self.vCat.plugincars_dict.values())
+            #pprint(list(self.vCat.plugincars_dict.values()))
+            pprint(self.vCat.plugincarsDB.vehicles.find({}))
             print('\nScrapePlugincars exec time: %.2fs\n'%(end-start))
         except KeyError as err: print("Check the dictionary keys")
         except IndexError: print("You're over indexing in the amount of variable that are available in the car name list.")
