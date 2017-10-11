@@ -19,6 +19,9 @@ import time
 import multiprocessing
 import json
 import re
+from pymongo import MongoClient
+from pymongo import ReturnDocument
+
 
 class VehicleCategorizer:
     def __init__(self, maxFail = 10):
@@ -33,6 +36,10 @@ class VehicleCategorizer:
         self.topspeedUrlDict={}
         #self.jdpowerUrlDict={}
         self.plugincars_dict=collections.defaultdict(dict)
+        
+        # get connections to the databases of each site that was scraped
+        self.mongoClient = MongoClient('localhost', 27017)
+        self.edmundsDB = self.mongoClient['edmundsDatabase']
         
         # counters for successful hits and failures
         
@@ -64,6 +71,11 @@ class VehicleCategorizer:
         # list to contain all of the urls scraped from the main plugincars page
         self.plugincars_url_list = []
         self.plugincars_car_names_list = []
+        
+        """
+        self.makeConnectionToPlugincarsDB()
+        self.collection_plugincars
+        """
         # remember to add try catch for attempting parse the plugincars site
         #while True:
         try:
@@ -102,6 +114,7 @@ class VehicleCategorizer:
         # reset the fail counter
         self.__initTry__()
         self.makePlugincarsUrlList()
+        self.makeConnectionToPlugincarsDB()
         #while True:
         try:
             # plugincars urls are used to create their individual soups so that they can be parsed
@@ -114,6 +127,7 @@ class VehicleCategorizer:
                 # and individual car soup
                 # there is an option to put the keys into the
                 curr_car_dict = self.plugincars_dict[self.plugincars_car_names_list[i]]
+                curr_car_dict['name'] = self.plugincars_car_names_list[i]
                 curr_car_dict['make'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[0:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")]
                 curr_car_dict['model'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")+1:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" specifications")]
                 curr_car_dict['base_msrp($)'] = ''.join(x for x in curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[1].text if x.isdigit()) if curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[1].text != '' else '-1'
@@ -213,7 +227,18 @@ class VehicleCategorizer:
             #if self.failCounter >= self.maxFail:
             print("There is something wrong:", e)
         pprint.pprint(self.edmunds_url_set)
-                
+        
+    """    
+    def scrapeEdmunds(self):
+        #scrape the details from each of the 
+        for url in self.edmunds_url_set:
+            # parameters: make, model, year, trim, new vs. used, mpg, msrp
+    """
+            
+    def makeConnectionToPlugincarsDB(self):
+        self.plugincarsDB = self.mongoClient['plugincarsDatabase']
+        self.collection_plugincars = self.plugincarsDB['vehicle']
+        
     
     # reset the failCounter so that you keep attempting to scrape the site until you get a hit
     def __initTry__(self):

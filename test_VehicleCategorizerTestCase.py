@@ -9,7 +9,7 @@ Created on Mon Sep 25 15:35:52 2017
 import VehicleCategorizer
 import unittest
 import time
-import multiprocessing
+from pprint import pprint
 
 # generate the testcase
 class VehicleCategorizerTestCase(unittest.TestCase):
@@ -28,13 +28,14 @@ class VehicleCategorizerTestCase(unittest.TestCase):
             end = time.time()
             # print the information collected during the test so that I can
             # manually check the information
-            self.vCat.printPlugincarsDict()
+            #self.vCat.printPlugincarsDict()
+            pprint(self.vCat.plugincars_dict.values())
             print('\nScrapePlugincars exec time: %.2fs\n'%(end-start))
         except KeyError as err: print("Check the dictionary keys")
         except IndexError: print("You're over indexing in the amount of variable that are available in the car name list.")
      
     # test the information collected from the edmunds site (still in progress)
-    #@unittest.skip("Skip edmunds for this test.")
+    @unittest.skip("Skip edmunds for this test.")
     def test_edmunds(self):
         try:
             start = time.time()
