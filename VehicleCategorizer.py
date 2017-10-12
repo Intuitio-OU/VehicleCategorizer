@@ -159,16 +159,15 @@ class VehicleCategorizer:
         self.edmundsClient = uReq.get(self.edmunds_url)
         edmundsStrain = strain('a')
         edmundsSoup = list(soup(self.edmundsClient.content, 'html.parser', parse_only=edmundsStrain))[7:51]
-        for i in range(len(edmundsSoup)): edmundsSoup[i] = self.edmunds_url + edmundsSoup[i]['href'][1:]
         # this is the cleanest solution because it is possible that the site can add more car makes later but stable for extracting data in the mean time
-        edmundsMakeRS = (gReq(url) for url in edmundsSoup)
-        edmundsMakeResponses = list(gReq.map(edmundsMakeRS))
-        print(edmundsMakeResponses)
+        edmundsMakeRequests = (gReq.get(self.edmunds_url+a['href'][1:]) for a in edmundsSoup)
+        edmundsMakeResponses = gReq.map(edmundsMakeRequests)
         for makeResponse in edmundsMakeResponses:
-            print('made it to secondary loop')
+            print('made it to secondary loop with make response', makeResponse)
+            if makeResponse == None: continue
             edmundsMakeStrain = strain('div',{'class' : "card-container"})
             edmundsMakeSoup = list(soup(makeResponse.text, 'html.parser', parse_only = edmundsMakeStrain))
-            edmundsYearRS = (gReq(self.edmunds_url+div.a['href'][1:]) for div in edmundsMakeSoup)
+            edmundsYearRS = (gReq.get(self.edmunds_url+div.a['href'][1:]) for div in edmundsMakeSoup)
             edmundsYearResponses = gReq.map(edmundsYearRS)
             for yearResponse in edmundsYearResponses:
                 edmundsYearStrain = strain('li', {'class' : 'medium'})
@@ -202,13 +201,16 @@ class VehicleCategorizer:
                 if self.failCounter >= self.maxFail:
                     print("There is something wrong:", e)
             """
-        #pprint.pprint(self.edmunds_url_set)
+    def printEdmundsUrlList(self):
+        pprint(self.edmunds_url_set)
             
     def scrapeEdmunds(self):
         #scrape the details from each of the 
-        for url in self.edmunds_url_set:
-            # parameters: make, model, year, trim, new vs. used, mpg, msrp
-            print(url)
+        edmundsResponseSet = (gReq.get(url) for url in self.edmunds_url_set)
+        edmundsResponses = gReq.map(edmundsResponseSet)
+        for response in edmundsResponses:
+            self.edmunds_dict[response.url] = curr_edmunds_dict
+            #curr_edmunds_dict 
     
         
     # reset the failCounter so that you keep attempting to scrape the site until you get a hit
