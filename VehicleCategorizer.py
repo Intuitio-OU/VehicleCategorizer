@@ -13,14 +13,13 @@ import collections
 # from ratelimit import *
 from bs4 import BeautifulSoup as soup
 import requests as uReq
-import pprint
+from pprint import pprint
 import csv
 import time
 import multiprocessing
 import json
 import re
-from pymongo import MongoClient
-from pymongo import ReturnDocument
+
 
 
 class VehicleCategorizer:
@@ -38,10 +37,8 @@ class VehicleCategorizer:
         self.plugincars_dict=collections.defaultdict(dict)
         
         # get connections to the databases of each site that was scraped
-        self.mongoClient = MongoClient('localhost', 27017)
-        self.edmundsDB = self.mongoClient['edmundsDatabase']
-        self.plugincarsDB = self.mongoClient['plugincarsDatabase']
-        self.collection_plugincars = self.plugincarsDB['vehicles']
+        #self.edmundsDB = self.mongoClient['edmundsDatabase']
+        
         
         # counters for successful hits and failures
         
@@ -165,12 +162,9 @@ class VehicleCategorizer:
                 print('scrapePluginCars error\n')
                 break
             """
-
-        test = self.collection_plugincars.insert_many(list(self.plugincars_dict.values()))
-        #self.fillPlugincarsDB()
     
     def printPlugincarsDict(self):
-        pprint.pprint(dict(self.plugincars_dict))
+        pprint(dict(self.plugincars_dict))
     
     # create the urls so that you can use the requests function to scrape the edmunds site
     def makeEdmundsUrlList(self):
@@ -230,21 +224,17 @@ class VehicleCategorizer:
             #if self.failCounter >= self.maxFail:
             print("There is something wrong:", e)
         #pprint.pprint(self.edmunds_url_set)
-        
-    """    
+            
     def scrapeEdmunds(self):
         #scrape the details from each of the 
         for url in self.edmunds_url_set:
             # parameters: make, model, year, trim, new vs. used, mpg, msrp
-    """
             
-    #def makeConnectionToPlugincarsDB(self):
-        
+    
         
     #def fillPlugincarsDB(self):
         # fill mongo database with the information collected on each vehicle
         
-    
     # reset the failCounter so that you keep attempting to scrape the site until you get a hit
     def __initTry__(self):
         self.failCounter = 0
