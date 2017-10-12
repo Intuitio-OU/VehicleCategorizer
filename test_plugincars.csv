@@ -1,38 +1,38 @@
-name,name,make,model,base_msrp($),tech,body,range(mi),battery_capacity(kWh),charge_rate(kW),_id
-Audi A3 E-Tron,Audi A3 E-Tron,Audi,A3 E-Tron,38900,Plug-in Hybrid,Luxury,16,9,3.3,59de8aee5553f219d845f9df
-BMW 330e,BMW 330e,BMW,330e,43700,Plug-in Hybrid,Sedan,14,7,3.7,59de8aee5553f219d845f9e0
-BMW 530e,BMW 530e,BMW,530e,52400,Plug-in Hybrid,Sedan,31,9,3.3,59de8aef5553f219d845f9e1
-BMW 740e xDrive Plug-In Hybrid,BMW 740e xDrive Plug-In Hybrid,BMW,740e xDrive Plug-In Hybrid,91000,Plug-in Hybrid,Sedan,14,9,3.3,59de8aef5553f219d845f9e2
-BMW i3,BMW i3,BMW,i3,43400,Electric Vehicle,Sedan,114,33,7.7,59de8af05553f219d845f9e3
-BMW i8,BMW i8,BMW,i8,137000,Plug-in Hybrid,Coupe,25,7,3.3,59de8af05553f219d845f9e4
-BMW X5 xdrive40e ,BMW X5 xdrive40e ,BMW,X5 xdrive40e ,64000,Plug-in Hybrid,SUV,13,9,3.5,59de8af05553f219d845f9e5
-Cadillac CT6 Plug-in Hybrid,Cadillac CT6 Plug-in Hybrid,Cadillac,CT6 Plug-in Hybrid,75000,Plug-in Hybrid,Luxury,31,18,3.3,59de8af15553f219d845f9e6
-Chevrolet Bolt,Chevrolet Bolt,Chevrolet,Bolt,37500,Electric Vehicle,Sedan,238,60,7.2,59de8af15553f219d845f9e7
-Chevy Volt,Chevy Volt,Chevy,Volt,33200,Plug-in Hybrid,Sedan,53,18,3.6,59de8af25553f219d845f9e8
-Chrysler Pacifica Plug-in Hybrid,Chrysler Pacifica Plug-in Hybrid,Chrysler,Pacifica Plug-in Hybrid,43100,Plug-in Hybrid,Wagon/Van,30,16,6.6,59de8af25553f219d845f9e9
-Fiat 500e,Fiat 500e,Fiat,500e,32600,Electric Vehicle,Coupe,84,24,6.6,59de8af25553f219d845f9ea
-Ford C-Max Energi,Ford C-Max Energi,Ford,C-Max Energi,27100,Plug-in Hybrid,Wagon/Van,20,8,3.3,59de8af35553f219d845f9eb
-Ford Focus Electric,Ford Focus Electric,Ford,Focus Electric,29200,Electric Vehicle,Sedan,115,23,6.6,59de8af35553f219d845f9ec
-Ford Fusion Energi,Ford Fusion Energi,Ford,Fusion Energi,33900,Plug-in Hybrid,Sedan,19,7,3.3,59de8af35553f219d845f9ed
-Honda Clarity Electric,Honda Clarity Electric,Honda,Clarity Electric,-1,Electric Vehicle,Sedan,89,25,-1,59de8af45553f219d845f9ee
-Hyundai Ioniq,Hyundai Ioniq,Hyundai,Ioniq,29500,Electric Vehicle,Sedan,124,28,7.0,59de8af45553f219d845f9ef
-Hyundai Sonata Plug-in Hybrid,Hyundai Sonata Plug-in Hybrid,Hyundai,Sonata Plug-in Hybrid,35400,Plug-in Hybrid,Sedan,27,10,3.3,59de8af75553f219d845f9f0
-Kia Optima Plug-in Hybrid,Kia Optima Plug-in Hybrid,Kia,Optima Plug-in Hybrid,35200,Plug-in Hybrid,Sedan,29,10,3.3,59de8af85553f219d845f9f1
-Kia Soul EV,Kia Soul EV,Kia,Soul EV,34500,Electric Vehicle,Sedan,93,27,6.6,59de8af85553f219d845f9f2
-Mercedes B-Class Electric Drive,Mercedes B-Class Electric Drive,Mercedes,B-Class Electric Drive,42400,Electric Vehicle,Sedan,85,28,10.0,59de8af95553f219d845f9f3
-Mercedes C350 Plug-in Hybrid,Mercedes C350 Plug-in Hybrid,Mercedes,C350 Plug-in Hybrid,46400,Plug-in Hybrid,Sedan,20,6,3.3,59de8af95553f219d845f9f4
-Mercedes S550 Plug-in Hybrid,Mercedes S550 Plug-in Hybrid,Mercedes,S550 Plug-in Hybrid,97000,Plug-in Hybrid,Sedan,20,8,3.3,59de8afa5553f219d845f9f5
-Mercedes-Benz GLE550e,Mercedes-Benz GLE550e,Mercedes-Benz,GLE550e,67000,Plug-in Hybrid,SUV,12,9,3.3,59de8afa5553f219d845f9f6
-Mini Cooper S E Countryman ALL4,Mini Cooper S E Countryman ALL4,Mini,Cooper S E Countryman ALL4,37700,Plug-in Hybrid,SUV,25,8,3.3,59de8afa5553f219d845f9f7
-Nissan LEAF,Nissan LEAF,Nissan,LEAF,29000,Electric Vehicle,Sedan,107,30,6.6,59de8afb5553f219d845f9f8
-Porsche Cayenne S E-Hybrid,Porsche Cayenne S E-Hybrid,Porsche,Cayenne S E-Hybrid,78000,Plug-in Hybrid,SUV,14,11,3.6,59de8afb5553f219d845f9f9
-Smart Electric Drive,Smart Electric Drive,Smart,Electric Drive,23800,Electric Vehicle,Coupe,58,17,7.2,59de8afc5553f219d845f9fa
-Tesla Model 3,Tesla Model 3,Tesla,Model 3,35000,Electric Vehicle,Sedan,220,-1,-1,59de8afc5553f219d845f9fb
-Tesla Model S,Tesla Model S,Tesla,Model S,71000,Electric Vehicle,Sedan,315,100,10.0,59de8afc5553f219d845f9fc
-Tesla Model X,Tesla Model X,Tesla,Model X,80000,Electric Vehicle,SUV,289,100,17.0,59de8afd5553f219d845f9fd
-Toyota Prius Prime (Plug-in Hybrid),Toyota Prius Prime (Plug-in Hybrid),Toyota,Prius Prime (Plug-in Hybrid),28000,Plug-in Hybrid,Sedan,25,9,3.3,59de8afd5553f219d845f9fe
-Volkswagen E-Golf,Volkswagen E-Golf,Volkswagen,E-Golf,30500,Electric Vehicle,Sedan,125,36,7.2,59de8afd5553f219d845f9ff
-Volvo XC90 T8 ,Volvo XC90 T8 ,Volvo,XC90 T8 ,69000,Plug-in Hybrid,SUV,14,9,3.3,59de8afe5553f219d845fa00
-Volvo XC60 T8 ,Volvo XC60 T8 ,Volvo,XC60 T8 ,52900,Plug-in Hybrid,SUV,20,10,3.5,59de8afe5553f219d845fa01
-Chevrolet Spark EV,Chevrolet Spark EV,Chevrolet,Spark EV,26000,Electric Vehicle,Coupe,82,19,3.3,59de8aff5553f219d845fa02
-Porsche Panamera S E-Hybrid,Porsche Panamera S E-Hybrid,Porsche,Panamera S E-Hybrid,93000,Plug-in Hybrid,Sedan,16,9,3.0,59de8aff5553f219d845fa03
+name,name,make,model,base_msrp($),tech,body,range(mi),battery_capacity(kWh),charge_rate(kW)
+Audi A3 E-Tron | PluginCars.com,Audi A3 E-Tron | PluginCars.com,Audi,A3 E-Tron,38900,Plug-in Hybrid,Luxury,16,9,3.3
+BMW 330e | PluginCars.com,BMW 330e | PluginCars.com,BMW,330e,43700,Plug-in Hybrid,Sedan,14,7,3.7
+BMW 530e | PluginCars.com,BMW 530e | PluginCars.com,BMW,530e,52400,Plug-in Hybrid,Sedan,31,9,3.3
+The more efficient plug-in version of BMW's flagship sedan | PluginCars.com,The more efficient plug-in version of BMW's flagship sedan | PluginCars.com,BMW,740e xDrive Plug-In Hybrid,91000,Plug-in Hybrid,Sedan,14,9,3.3
+BMW i3 | PluginCars.com,BMW i3 | PluginCars.com,BMW,i3,43400,Electric Vehicle,Sedan,114,33,7.7
+The BMW i8 | PluginCars.com,The BMW i8 | PluginCars.com,BMW,i8,137000,Plug-in Hybrid,Coupe,25,7,3.3
+BMW X5 xdrive40e  | PluginCars.com,BMW X5 xdrive40e  | PluginCars.com,BMW,X5 xdrive40e ,64000,Plug-in Hybrid,SUV,13,9,3.5
+Cadillac CT6 Plug-in Hybrid | PluginCars.com,Cadillac CT6 Plug-in Hybrid | PluginCars.com,Cadillac,CT6 Plug-in Hybrid,75000,Plug-in Hybrid,Luxury,31,18,3.3
+Chevrolet Bolt | PluginCars.com,Chevrolet Bolt | PluginCars.com,Chevrolet,Bolt,37500,Electric Vehicle,Sedan,238,60,7.2
+The Chevy Volt | PluginCars.com,The Chevy Volt | PluginCars.com,Chevy,Volt,33200,Plug-in Hybrid,Sedan,53,18,3.6
+Chrysler Pacifica Plug-in Hybrid | PluginCars.com,Chrysler Pacifica Plug-in Hybrid | PluginCars.com,Chrysler,Pacifica Plug-in Hybrid,43100,Plug-in Hybrid,Wagon/Van,30,16,6.6
+Fiat 500e | PluginCars.com,Fiat 500e | PluginCars.com,Fiat,500e,32600,Electric Vehicle,Coupe,84,24,6.6
+Ford C-Max Energi | PluginCars.com,Ford C-Max Energi | PluginCars.com,Ford,C-Max Energi,27100,Plug-in Hybrid,Wagon/Van,20,8,3.3
+The Ford Focus Electric | PluginCars.com,The Ford Focus Electric | PluginCars.com,Ford,Focus Electric,29200,Electric Vehicle,Sedan,115,23,6.6
+Ford Fusion Energi | PluginCars.com,Ford Fusion Energi | PluginCars.com,Ford,Fusion Energi,33900,Plug-in Hybrid,Sedan,19,7,3.3
+Honda Clarity Electric | PluginCars.com,Honda Clarity Electric | PluginCars.com,Honda,Clarity Electric,-1,Electric Vehicle,Sedan,89,25,-1
+Hyundai Ioniq | PluginCars.com,Hyundai Ioniq | PluginCars.com,Hyundai,Ioniq,29500,Electric Vehicle,Sedan,124,28,7.0
+Hyundai Sonata Plug-in Hybrid | PluginCars.com,Hyundai Sonata Plug-in Hybrid | PluginCars.com,Hyundai,Sonata Plug-in Hybrid,35400,Plug-in Hybrid,Sedan,27,10,3.3
+Kia Optima Plug-in Hybrid | PluginCars.com,Kia Optima Plug-in Hybrid | PluginCars.com,Kia,Optima Plug-in Hybrid,35200,Plug-in Hybrid,Sedan,29,10,3.3
+Kia Soul EV | PluginCars.com,Kia Soul EV | PluginCars.com,Kia,Soul EV,34500,Electric Vehicle,Sedan,93,27,6.6
+Mercedes B-Class Electric Drive | PluginCars.com,Mercedes B-Class Electric Drive | PluginCars.com,Mercedes,B-Class Electric Drive,42400,Electric Vehicle,Sedan,85,28,10.0
+Small luxury plug-in hybrid with 20 miles of all-electric range | PluginCars.com,Small luxury plug-in hybrid with 20 miles of all-electric range | PluginCars.com,Mercedes,C350 Plug-in Hybrid,46400,Plug-in Hybrid,Sedan,20,6,3.3
+Mercedes S550 Plug-in Hybrid | PluginCars.com,Mercedes S550 Plug-in Hybrid | PluginCars.com,Mercedes,S550 Plug-in Hybrid,97000,Plug-in Hybrid,Sedan,20,8,3.3
+Mercedes-Benz GLE550e | PluginCars.com,Mercedes-Benz GLE550e | PluginCars.com,Mercedes-Benz,GLE550e,67000,Plug-in Hybrid,SUV,12,9,3.3
+The new Mini Countryman Plug-In Hybrid | PluginCars.com,The new Mini Countryman Plug-In Hybrid | PluginCars.com,Mini,Cooper S E Countryman ALL4,37700,Plug-in Hybrid,SUV,25,8,3.3
+The Nissan Leaf  | PluginCars.com,The Nissan Leaf  | PluginCars.com,Nissan,LEAF,29000,Electric Vehicle,Sedan,107,30,6.6
+Review and Pictures of Porsche Cayenne S E-Hybrid | PluginCars.com,Review and Pictures of Porsche Cayenne S E-Hybrid | PluginCars.com,Porsche,Cayenne S E-Hybrid,78000,Plug-in Hybrid,SUV,14,11,3.6
+Smart Electric Drive | PluginCars.com,Smart Electric Drive | PluginCars.com,Smart,Electric Drive,23800,Electric Vehicle,Coupe,58,17,7.2
+Tesla Model 3 | PluginCars.com,Tesla Model 3 | PluginCars.com,Tesla,Model 3,35000,Electric Vehicle,Sedan,220,-1,-1
+Tesla Model S | PluginCars.com,Tesla Model S | PluginCars.com,Tesla,Model S,71000,Electric Vehicle,Sedan,315,100,10.0
+Tesla Model X | PluginCars.com,Tesla Model X | PluginCars.com,Tesla,Model X,80000,Electric Vehicle,SUV,289,100,17.0
+The Toyota Prius Plug-in Hybrid | PluginCars.com,The Toyota Prius Plug-in Hybrid | PluginCars.com,Toyota,Prius Prime (Plug-in Hybrid),28000,Plug-in Hybrid,Sedan,25,9,3.3
+Volkswagen E-Golf | PluginCars.com,Volkswagen E-Golf | PluginCars.com,Volkswagen,E-Golf,30500,Electric Vehicle,Sedan,125,36,7.2
+Volvo XC90 T8 | PluginCars.com,Volvo XC90 T8 | PluginCars.com,Volvo,XC90 T8 ,69000,Plug-in Hybrid,SUV,14,9,3.3
+Volvo XC60 T8  | PluginCars.com,Volvo XC60 T8  | PluginCars.com,Volvo,XC60 T8 ,52900,Plug-in Hybrid,SUV,20,10,3.5
+Chevrolet Spark EV | PluginCars.com,Chevrolet Spark EV | PluginCars.com,Chevrolet,Spark EV,26000,Electric Vehicle,Coupe,82,19,3.3
+Porsche Panamera S E-Hybrid | PluginCars.com,Porsche Panamera S E-Hybrid | PluginCars.com,Porsche,Panamera S E-Hybrid,93000,Plug-in Hybrid,Sedan,16,9,3.0

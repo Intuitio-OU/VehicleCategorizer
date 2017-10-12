@@ -13,6 +13,7 @@ import collections
 # from ratelimit import *
 from bs4 import BeautifulSoup as soup
 import requests as uReq
+import grequests as gReq
 from pprint import pprint
 import csv
 import time
@@ -35,7 +36,7 @@ class VehicleCategorizer:
         self.topspeedUrlDict={}
         #self.jdpowerUrlDict={}
         self.plugincars_dict=collections.defaultdict(dict)
-        
+        self.edmunds_dict=collections.defaultdict(dict)
         # get connections to the databases of each site that was scraped
         #self.edmundsDB = self.mongoClient['edmundsDatabase']
         
@@ -109,22 +110,21 @@ class VehicleCategorizer:
     # for this specific section was blank    
     def scrapePlugincars(self, filepath = 'plugincars.csv'):
         # reset the fail counter
-        self.__initTry__()
+        #self.__initTry__()
         self.makePlugincarsUrlList()
         #self.makeConnectionToPlugincarsDB()
         #while True:
         try:
-            # plugincars urls are used to create their individual soups so that they can be parsed
-            for i in range(len(self.plugincars_url_list)):
-                # need to form a new client in order to get the soup from each url and then
-                curr_plugincars_client = uReq.get(self.plugincars_url_list[i])
+            rs = (gReq.get(url) for url in self.plugincars_url_list)
+            r = list(gReq.map(rs))
+            for response in r:
                 # need to get the form the soup to scrape from the individual urls
-                curr_plugincars_soup  = soup(curr_plugincars_client.content, "html.parser")
+                curr_plugincars_soup = soup(response.text, "html.parser")
                 # start sorintg out each of the pieces of information from the main soup
                 # and individual car soup
                 # there is an option to put the keys into the
-                curr_car_dict = self.plugincars_dict[self.plugincars_car_names_list[i]]
-                curr_car_dict['name'] = self.plugincars_car_names_list[i]
+                curr_car_dict = self.plugincars_dict[response.url]
+                curr_car_dict['name'] = curr_plugincars_soup.find('title').text[0:curr_plugincars_soup.find('title').text.index(' |')]
                 curr_car_dict['make'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[0:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")]
                 curr_car_dict['model'] = curr_plugincars_soup.find("h3", {"class" : "vehicle-stats-title"}).text[curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" ")+1:curr_plugincars_soup.find("h3", class_="vehicle-stats-title").text.find(" specifications")]
                 curr_car_dict['base_msrp($)'] = ''.join(x for x in curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[1].text if x.isdigit()) if curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[1].text != '' else '-1'
@@ -135,7 +135,7 @@ class VehicleCategorizer:
                 curr_car_dict['charge_rate(kW)'] = curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")] if curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text[0:curr_plugincars_soup.find_all("td", {"class" : "vehicle-stats-data"})[8].text.find(" ")] != '' else "-1"
             # create csv file from the data collected
             # intialize a list for the parameters that classify your values        
-            fieldnames =  ['name'] + list(list(self.plugincars_dict.values())[0].keys())
+            fieldnames = list(list(self.plugincars_dict.values())[0].keys())
             # write the collected information in the dictionary for plugincars into a csv file labeled plugincars.csv
             with open(filepath,'w', newline ='') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames)
@@ -229,13 +229,14 @@ class VehicleCategorizer:
         #scrape the details from each of the 
         for url in self.edmunds_url_set:
             # parameters: make, model, year, trim, new vs. used, mpg, msrp
-            
+            print(url)
     
         
     #def fillPlugincarsDB(self):
         # fill mongo database with the information collected on each vehicle
-        
+    
+    """    
     # reset the failCounter so that you keep attempting to scrape the site until you get a hit
     def __initTry__(self):
         self.failCounter = 0
-        
+    """    
