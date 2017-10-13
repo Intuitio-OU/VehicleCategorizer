@@ -163,7 +163,6 @@ class VehicleCategorizer:
         edmundsMakeRequests = (gReq.get(self.edmunds_url+a['href'][1:]) for a in edmundsSoup)
         edmundsMakeResponses = gReq.map(edmundsMakeRequests)
         for makeResponse in edmundsMakeResponses:
-            print('made it to secondary loop with make response', makeResponse)
             if makeResponse == None: continue
             edmundsMakeStrain = strain('div',{'class' : "card-container"})
             edmundsMakeSoup = list(soup(makeResponse.text, 'html.parser', parse_only = edmundsMakeStrain))
@@ -205,13 +204,32 @@ class VehicleCategorizer:
         pprint(self.edmunds_url_set)
             
     def scrapeEdmunds(self):
-        #scrape the details from each of the 
+        #scrape the details from each of the
+        self.makeEdmundsUrlList()
         edmundsResponseSet = (gReq.get(url) for url in self.edmunds_url_set)
         edmundsResponses = gReq.map(edmundsResponseSet)
         for response in edmundsResponses:
-            self.edmunds_dict[response.url] = curr_edmunds_dict
-            #curr_edmunds_dict 
-    
+            #curr_edmunds_soup = soup(response.text, 'html.parser')
+            curr_edmunds_dict = self.edmunds_dict[response.url]
+            curr_edmunds_dict['make'] = response.url[self.find_nth(response.url, '/', 3)+1:self.find_nth(response.url,'/',4)]
+            curr_edmunds_dict['model'] = response.url[self.find_nth(response.url, '/', 4)+1:self.find_nth(response.url,'/',5)]
+            curr_edmunds_dict['year'] = response.url[self.find_nth(response.url, '/', 5)+1:self.find_nth(response.url,'/',6)]
+            curr_edmunds_dict['body'] = response.url[self.find_nth(response.url, '/', 6)+1:self.find_nth(response.url,'/',7)]
+            curr_edmunds_dict['condition'] = 'used' if 'used' in response.url else 'new'
+            """
+            curr_edmunds_dict['base_msrp($)']
+            curr_edmunds_dict['range(mi)']
+            curr_edmunds_dict['']
+            """
+        print(self.edmunds_dict['https://www.edmunds.com/volkswagen/touareg/2017/suv/'])     
+    # find the start index of the nth instance of a substring in a string
+    def find_nth(haystack, needle, n):
+        start = haystack.find(needle)
+        while start >= 0 and n > 1:
+            start = haystack.find(needle, start+len(needle))
+            n -= 1
+        return start
+
         
     # reset the failCounter so that you keep attempting to scrape the site until you get a hit
     def __initTry__(self):

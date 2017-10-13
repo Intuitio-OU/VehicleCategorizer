@@ -37,10 +37,10 @@ class VehicleCategorizerTestCase(unittest.TestCase):
     def test_edmunds(self):
         try:
             start = time.time()
-            self.vCat.makeEdmundsUrlList()
+            self.vCat.scrapeEdmunds()
             end = time.time()
             print('\nMake Edmunds Url List exec time: %.2fs\n'%(end-start))
-            self.vCat.printEdmundsUrlList()
+            #self.vCat.printEdmundsUrlList()
         except Exception as e:
             print(e)
     """
