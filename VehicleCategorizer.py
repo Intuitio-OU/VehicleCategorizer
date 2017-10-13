@@ -223,7 +223,7 @@ class VehicleCategorizer:
             """
         print(self.edmunds_dict['https://www.edmunds.com/volkswagen/touareg/2017/suv/'])     
     # find the start index of the nth instance of a substring in a string
-    def find_nth(haystack, needle, n):
+    def find_nth(self,haystack, needle, n):
         start = haystack.find(needle)
         while start >= 0 and n > 1:
             start = haystack.find(needle, start+len(needle))
