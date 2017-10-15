@@ -6,24 +6,32 @@ Created on Wed Oct 11 17:47:54 2017
 """
 from VehicleCategorizer import VehicleCategorizer
 from pymongo import MongoClient
-from pymongo import ReturnDocument
 from pprint import pprint
 
+# mongodb connection string
+connString = 'mongodb://mattandersoninf:Hummingbird95.@cluster0-shard-00-00-bzmsv.mongodb.net:27017,cluster0-shard-00-01-bzmsv.mongodb.net:27017,cluster0-shard-00-02-bzmsv.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin'
+
 class VehicleCategorizerDatabase:
+    # intitalize mongodb cluster connection
     def __init__(self):
+        # create instance of VehicleCategorizer class
         self.vc = VehicleCategorizer()
-        self.mongoClient = MongoClient('localhost', 27017)
-        self.plugincars_database = self.mongoClient.plugincars_database
-        #print('plugincars databse name:', self.plugincars_database.name)
-        #print('plugincars databse:', self.plugincars_database)
+        self.mongoClient = MongoClient(connString)
         self.plugincars_vehicles = self.plugincars_database['vehicles']
-        self.plugincars_vehicles.drop()
-        print('vehicles database cleared')
-        #self.plugincars_collection = self.plugincars_database['plugincars_collection']
-        #print('plugincars collections',self.plugincars_database.collection_names)
-        #self.plugincars_vehicles.insert_one(curr_car_dict)
-        #print('collections in plugincars database:', self.plugincars_database.collection_names(include_system_collections=False))
-            
+        
+    # add data into the mognodb cluster based on which collection and database
+    def addData(self, database, collection, data):
+        self.monogoClient.vehicles.data.insert_one(data)
+    
+    def deleteData(self, make, model, year):
+        self.mongoClient.vehicles.data.delete_one()
+    
+    # return all vehicles in database with the make described    
+    def getAllVehiclesByMake(self, make):
+        self.mongoClient.vehicles.make
+    
+    # def
+        
     # print all of the information for each vehicle in the plugincars database         
     def printAllVehiclesInPluginCarsDatabase(self):
         for vehicle in self.plugincars_vehicles.find():

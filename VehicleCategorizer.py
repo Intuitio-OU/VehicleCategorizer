@@ -36,17 +36,6 @@ class VehicleCategorizer:
         self.plugincars_dict=collections.defaultdict(dict)
         self.edmunds_dict=collections.defaultdict(dict)
         # get connections to the databases of each site that was scraped
-        #self.edmundsDB = self.mongoClient['edmundsDatabase']
-        
-        
-        # counters for successful hits and failures
-        
-        # get the url of edmunds
-        #self.edmunds_url = "https://www.topspeed.com/cars/plugin-cars/ke4486.html"
-        # open the html file of the webpage
-        #self.edmundsClient = uReq.get(self.edmunds_url)
-        # get the webpage's html information
-        #self.edmunds_soup = soup(self.edmundsClient.content)
         
         self.maxFail = maxFail
         self.failCounter = 0
@@ -229,6 +218,10 @@ class VehicleCategorizer:
             start = haystack.find(needle, start+len(needle))
             n -= 1
         return start
+    
+    # query the edmunds site for a data on a specific car
+    def makeEdmundsQuery(self,make,model,year, used = False):
+        
 
         
     # reset the failCounter so that you keep attempting to scrape the site until you get a hit
