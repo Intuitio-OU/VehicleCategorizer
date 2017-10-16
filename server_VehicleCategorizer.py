@@ -20,8 +20,14 @@ class VehicleCategorizerDatabase:
         self.plugincars_vehicles = self.plugincars_database['vehicles']
         
     # add data into the mognodb cluster based on which collection and database
-    def addData(self, database, collection, data):
-        self.monogoClient.vehicles.data.insert_one(data)
+    # must add data in json format
+    def addData(self, database, collection, data, filename = None):
+        if filename == None:
+            self.monogoClient.vehicles.data.insert_one(data)
+        else:
+            pass
+            #self.mongoClient
+            
     
     def deleteData(self, make, model, year):
         self.mongoClient.vehicles.data.delete_one()
@@ -29,8 +35,6 @@ class VehicleCategorizerDatabase:
     # return all vehicles in database with the make described    
     def getAllVehiclesByMake(self, make):
         self.mongoClient.vehicles.make
-    
-    # def
         
     # print all of the information for each vehicle in the plugincars database         
     def printAllVehiclesInPluginCarsDatabase(self):
