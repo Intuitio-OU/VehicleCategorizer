@@ -25,6 +25,7 @@ class VehicleCategorizerDatabase:
         if filename == None:
             self.monogoClient.vehicles.data.insert_one(data)
         else:
+            # modify this condition to help add json formatted information into mongo cluster
             pass
             #self.mongoClient
             
