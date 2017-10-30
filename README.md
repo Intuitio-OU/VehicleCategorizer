@@ -1,7 +1,7 @@
 # VehicleCategorizer
 ----------------------------------------------------------------------------------------------------------------------------------------
 
-Pull information from different websites about vehicles, need to specify the sites.
+Pull information from different websites about vehicles and store them within a mongo server
 
 Information that is important to consider when looking at cars include mileage, safety rating, and mpg. This program is
 specicifically tailored towards pulling infromation vehicles ranging from make, model, year, trim, base msrp, and mpg/ range.
