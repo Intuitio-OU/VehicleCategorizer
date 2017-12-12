@@ -14,9 +14,6 @@ Possible expansions with googlescraper being able to access more search engines
 - ratelimit: library for constraining the scrape rate to prevent getting bloacked
 - unittest: testing library
 - time: track run time of all functions implemented
-- tests currenlty demonstrate the ablility to generate urls for from the plugincars and edmunds sites and can extract a dataset from
-  the plugincars site, scraping and generating urls for other sites are still in progress
-- pymongo: transfer the colected information into a mongodb server in json format
 
 General consensus from multiple sites is that the main 2 libraries required are requests and bs4.
 
