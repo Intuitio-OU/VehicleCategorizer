@@ -7,7 +7,6 @@ Information that is important to consider when looking at cars include mileage, 
 specicifically tailored towards pulling infromation vehicles ranging from make, model, year, trim, base msrp, and mpg/ range.
 
 Web scraping to be implemented on websites like google, google+, plugincars, jdpower, and edmunds.
-Possible expansions with googlescraper being able to access more search engines
 
 - BeatifulSoup from bs4: a fast and flexible parser for being able to access data from html and xml documents (this is probably what's going to be doing most of the heav lifting)
 - requests: extract text from webpages
